@@ -1,0 +1,86 @@
+<% include partials/header.ejs%>
+<link rel="stylesheet" type="text/css"  href="css/accueil.css">
+<div class="content mt-5">
+    <div class="text-center">
+        <h2>Welcome <span><%= user.username %></span> to Source2onto</h2>
+        <h5>Where do you want to extract data? </h5>
+    </div>
+    <div class="row mt-5 d-flex justify-content-center">
+       
+            <div class="col-sm-3">
+                <div class="card"   data-aos="fade-right" data-aos-duration="1500">
+                    <div class="card-body text-center">
+                            <i class="fa fa-book fa-5x" style="color:blue" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-footer text-center">
+                            <h5>Text</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                <div class="card" data-toggle="modal" data-target="#createProject" data-aos="fade-left" data-aos-duration="1500">
+                    <div class="card-body text-center">
+                        <i class="far fa-file-code fa-5x" style="color: green" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-footer text-center">
+                            <h5>Source code</h5>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="row mt-5 d-flex justify-content-center" >
+        <div class="col-sm-3">
+            <div class="card" data-aos="fade-right" data-aos-duration="1500">
+                <div class="card-body text-center">
+                        <i class="far fa-file-video fa-5x" style="color:red" aria-hidden="true"></i>
+                </div>
+                <div class="card-footer text-center">
+                        <h5>Video</h5>
+                </div>
+            </div>     
+        </div>
+        <div class="col-sm-3">
+            <div class="card"  data-aos="fade-left" data-aos-duration="1500">
+                <div class="card-body text-center">
+                        <i class="far fa-images fa-5x" style="color:rgb(165, 201, 37)" aria-hidden="true"></i>
+                </div>
+                <div class="card-footer text-center">
+                        <h5>Image</h5>
+                </div>
+            </div>     
+        </div>
+    </div>
+</div>
+  <div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered""role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">New Project</h3>
+          <button type="button" class="close" data-dismiss="modal" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+  
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="project/save">
+                <div class="form-group mt-3">
+                    <label>Project name*</label><br>
+                    <input type="text" name="desc_project" required class="form-control">
+                 </div>
+                 <input type="submit" class="btn btn-primary mt-3" style="color: white" value="ok">
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<%include partials/footer.ejs %>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="bootstrap-4.1.2-dist/js/bootstrap.min.js"></script>
+    <script src="aos-master/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>
+

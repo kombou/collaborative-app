@@ -1,0 +1,111 @@
+<!<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Extract data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/dolphin.png" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.1.2-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.1.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome-free-5.6.3-web/css/all.css">
+    <link rel="stylesheet" href="fontawesome-free-5.6.3-web/js/all.js">
+    <link rel="stylesheet"  href="aos-master/dist/aos.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script> var socket = io('/extraction');</script>
+    <script src="js/go-debug.js"></script>
+    <script src="js/Robot.js"></script>
+    <script id="code">
+      var robot;
+      function init(){
+        var $ = go.GraphObject.make;
+    
+        function nodeClicked(e, obj){
+          var evt = e.copy();
+          var node = obj.part();
+          var type = evt.clickCount === 2 ? "Double-Clicked: " : "Clicked: ";
+          var msg = type + node.data.key +" .";
+        }
+        myDiagram = 
+        $(go.Diagram, "myDiagramDiv", {
+          nodeTemplate: 
+          $(go.Node, "Auto", 
+          {
+            click: nodeClicked, 
+            doubleClick: nodeClicked,
+    
+          }, 
+        $(go.Shape, "Circle",
+          { fill: "lightgray", }, 
+          {portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"} ),
+          $(go.TextBlock, 
+          {margin: 3},
+          new go.Binding("text", "key"))),
+          "undoManager.isEnabled": true
+        });
+        robot = new Robot(myDiagram);
+        myPalette = 
+        $(go.Palette, "myPaletteDiv", 
+        {
+          nodeTemplate : myDiagram.nodeTemplate, 
+          model: new go.GraphLinksModel([
+            {key: "Pre"},
+            {key: "Target"},
+            {key: "Post"},
+            {key: "Other"},
+            {key: "Param"},
+          ])
+        });
+        function dragFromPalette(){
+          var dragdrop = { sourceDiagram: myPalette, targetDiagram: myDiagram };
+          robot.mouseDown(10, 5, 20, dragdrop);  
+          robot.mouseMove(60, 60, 100, dragdrop);
+          robot.mouseUp(100, 100, 200, dragdrop);
+        }
+        function deleteSelection(){
+          robot.keyDown("Del");
+          robot.keyUp("Del");
+        }
+      }
+    </script>
+</head>
+<body onload="init()">
+  <nav class=" aurelle navbar sticky-top navbar-expand  navbar-dark" >
+    <a class="navbar-brand" href="/accueil"><span><img width="45" height="45"  src="../img/dolphin.png" /></span><h4 style="color : white !important; ">Source2onto</h4></a>
+
+
+        <!-- Menu Area -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mosh-navbar" aria-controls="mosh-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse justify-content-end container-fluid" id="mosh-navbar">
+            <ul class="navbar-nav animated" id="nav">
+                <li class="nav-item active"><a class="nav-link" href="/accueil">Home</a></li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" >
+                            Develop </a>
+                          <div class="dropdown-menu">
+                              <a class="dropdown-item" href="/model">Define your model</a>
+                              <a class="dropdown-item" href="/extraction">Extractions</a>
+
+                          </div>
+                        </li>
+                     
+                    
+                     
+                      <li class="nav-item">
+                        <span class="nav-link"><%= user.username %></span>
+                      </li>
+                      <li class="nav-item">
+                       <a class="nav-link" href="/user/logout">Deconexion</a>
+                      </li>
+            </ul>
+        </div>
+      </nav>
+       
+         
+ <!--<span class="text-danger text-sm-center">
+    <% if(locals.flash && locals.flash.error) { %>
+    <%= flash.error%>
+    <% } %>-->
+</span>

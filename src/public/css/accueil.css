@@ -1,0 +1,120 @@
+ h4, .footer li a{
+    color: white;
+}
+
+h6{
+    font-weight: bold;
+}
+.ml-7{
+    margin-left: 70px;
+}
+.pt-7{
+    padding-top: 70px;
+}
+.aurelle {
+    background-color: #24004d !important;
+}
+.nav-item:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(99, 87, 139, 0.25) !important;
+    color: #24004d !important;
+}
+.content .head-cont button{
+    color: #24004d;
+    width: 120px !important;
+}
+.card:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgb(219, 219, 219) !important;
+    cursor: pointer;
+}
+
+
+/*.head{
+    position: relative;
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.head:after {
+    content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: linear-gradient(to bottom right, #1a8531, #0d6620);
+   opacity: 0.6;/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.head-cont{
+    background-color: #24004d  !important;
+    width: 100%;
+    height: 560px ;
+}
+
+ .content .head-cont h1 ,  .content .head-cont h3{
+     color: white;
+     text-align: center;
+ } 
+ .content .head-cont img{
+     margin-left: 225px;
+     margin-top: 100px;
+ }
+ .mt-7{
+     margin-top: 300px;
+}
+ .sign{
+    margin: 100px ;
+ }
+ .service {
+     margin: 50px;
+ }
+
+/*.card{
+    margin-left: 130px;
+}*/
+
+button{
+    width: 100%;
+    color: white;
+}
+input{
+    width: 100%;
+}
+.footer{
+    background-color: #262626;
+    width: 100%;
+}
+h3{
+    font-weight: bold;
+}
+.footer ul {
+  text-decoration: none !important;
+}
+.copyDiv{
+    background-color: #0d0d0d;
+}
+.copy{
+    color: gray;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+
+.dropdown{
+	position: relative;
+	display: inline-block;
+}
+.nav-link{
+	border:none;
+}
+.nav-link:hover{
+    color: white;
+}
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.search-form-area{
+    visibility: hidden;
+}
+

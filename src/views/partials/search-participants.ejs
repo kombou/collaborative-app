@@ -1,0 +1,17 @@
+   
+    <div class="list-group">
+            <% if(users.length === 0) { %>
+              <center> <p   class="list-group-item-text">Aucun resultat </p> </center> 
+            
+            <%}%>  
+        <% 
+            for (let index = 0; index < users.length; index++) {
+        %>                                          
+        <a href="#"  id="link<%=users[index].id%>" style="color:black" class="list-group-item ">
+            <h4  class="list-group-item-heading"><%=users[index].username%> </h4>
+                <p  style="color:gray" class="list-group-item-text"><%=users[index].email %></p>
+                <span class="float-right btn btn-success" id="btn<%=users[index].id%>" onclick="associerUser('<%=users[index].id%>')">Ajouter</span>
+        </a>
+        <%}%>                                     
+    </div>
+ 

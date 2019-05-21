@@ -1,0 +1,39 @@
+const express = require("express");
+
+//appRouter
+const app = require("./src/app");
+
+const extractionEmiter = require("./src/io/extraction.io");
+const chatEmitter = require('./src/io/chat.io');
+
+const http = require("http").Server(app);
+
+const io = require('socket.io')(http);
+
+
+
+let ioExtraction = io.of("/extraction");
+let ioChat = io.of("/chat");
+
+ioExtraction.on("connection", (socket) => {
+    extractionEmiter.repond(socket, ioExtraction);
+});
+
+ioChat.on("connection", (socket) => {
+    //chatEmitter.repond(socket,ioChat);
+    io.on('sending', function(data) {
+        io.emit('sending', data);
+        console.log(data)
+    });
+});
+
+
+
+
+const port = process.env.PORT || 3000;
+
+
+// Setup Express Listener
+http.listen(port, "0.0.0.0", function() {
+    console.log(`listening on: localhost:${port}`);
+});

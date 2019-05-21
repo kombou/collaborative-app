@@ -1,0 +1,135 @@
+{
+	"lire":{
+	"configurations":[
+		{"model":"model1", "language": "python", "view": "view1", "concept":"concept1", "data":"data1", "object":"object1"},
+		{"model":"model2", "language": "java", "view": "view2", "concept":"concept2", "data":"data2", "object":"object2"},
+		{"model":"model3", "language": "c++", "view": "view3", "concept":"concept3", "data":"data3", "object":"object3"},
+		{"model":"model4", "language": "python", "view": "view4", "concept":"concept4", "data":"data4", "object":"object4"},
+		{"model":"model5", "language": "java", "view": "view5", "concept":"concept5", "data":"data5", "object":"object5"},
+		{"model":"model6", "language": "python", "view": "view6", "concept":"concept6", "data":"data6", "object":"object6"},
+		{"model":"model7", "language": "c", "view": "view7", "concept":"concept7", "data":"data7", "object":"object7"}
+	],
+	"terms":[
+		{"name": "name1", "validate": true,"type": "type1","comments": "lorem ipsu patati patata"},
+		{"name": "name2", "validate": true,"type": "type2","comments": "lorem ipsu patati patata"},
+		{"name": "name3", "validate": false,"type": "type4","comments": "lorem ipsu patati patata"},
+		{"name": "name4", "validate": true,"type": "type1","comments": "lorem ipsu patati patata"},
+		{"name": "name5", "validate": false,"type": "type3","comments": "lorem ipsu patati patata"},
+		{"name": "name6", "validate": false,"type": "type3","comments": "lorem ipsu patati patata"},
+		{"name": "name7", "validate": true,"type": "type1","comments": "lorem ipsu patati patata"}
+	],
+	"summary":{
+		"details": [
+			{"description": "d1", "acronym": "acro1", "visibility": true, "categories": "Lorme", "status": "0", "licence": "Open source", "contacts": "690542977"},
+			{"description": "d2", "acronym": "acro2", "visibility": false, "categories": "lorem", "status": "9", "licence": "Open source", "contacts": ""},
+			{"description": "d3", "acronym": "acro3", "visibility": true, "categories": "ipsum", "status": "8", "licence": "Open source", "contacts": "677521896"},
+			{"description": "d4", "acronym": "acro4", "visibility": false, "categories": "Karate kid", "status": "7", "licence": "Open source", "contacts": ""},
+			{"description": "d5", "acronym": "acro5", "visibility": false, "categories": "Ciel", "status": "6", "licence": "Open source", "contacts": "653297841"},
+			{"description": "d6", "acronym": "acro6", "visibility": true, "categories": "Ange", "status": "5", "licence": "Open source", "contacts": "654879452"},
+			{"description": "d7", "acronym": "acro7", "visibility": false, "categories": "Chevalier", "status": "1", "licence": "Open source", "contacts": "678998788"}
+		],
+		"metrics": [
+			{"titre": "Terms","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Meta Knowledge","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Classes","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Individuels","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Data properties","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Objects properties","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Axiomes","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Classes","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Sub Classes","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "},
+			{"titre": "Sub Properties","valeur":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius "}
+		],
+		"submissions": [
+			{"version":1, "release":1.1, "date":"jj/mm/yyyy", "comments":"Amazing version"},
+			{"version":1, "release":1.3, "date":"jj/mm/yyyy", "comments":"Amazing version"},
+			{"version":1, "release":1.5, "date":"jj/mm/yyyy", "comments":"Amazing version"},
+			{"version":2, "release":2.1, "date":"jj/mm/yyyy", "comments":"Amazing version"},
+			{"version":2, "release":2.23, "date":"jj/mm/yyyy", "comments":"Amazing version"},
+			{"version":3, "release":3.0, "date":"jj/mm/yyyy", "comments":"Amazing version"},
+			{"version":3, "release":3.16, "date":"jj/mm/yyyy", "comments":"Amazing version"}
+		] 
+	},
+	"classes":{
+		"class1":[
+			{"subclasse":"subclasse1", "prefered name":"prefered name1","data credits" : "data credits1", "notation": "notation1", "label":"label1", "subclasses":"subclasses1", "data properties":"data properties1", "data objects":"data objects1"},
+			{"subclasse":"subclasse2", "prefered name":"prefered name2","data credits" : "data credits2", "notation": "notation2", "label":"label2", "subclasses":"subclasses2", "data properties":"data properties2", "data objects":"data objects2"},
+			{"subclasse":"subclasse3", "prefered name":"prefered name3","data credits" : "data credits3", "notation": "notation3", "label":"label3", "subclasses":"subclasses3", "data properties":"data properties3", "data objects":"data objects3"},
+			{"subclasse":"subclasse4", "prefered name":"prefered name4","data credits" : "data credits4", "notation": "notation4", "label":"label4", "subclasses":"subclasses4", "data properties":"data properties4", "data objects":"data objects4"},
+			{"subclasse":"subclasse5", "prefered name":"prefered name5","data credits" : "data credits5", "notation": "notation5", "label":"label5", "subclasses":"subclasses5", "data properties":"data properties5", "data objects":"data objects5"},
+			{"subclasse":"subclasse6", "prefered name":"prefered name6","data credits" : "data credits6", "notation": "notation6", "label":"label6", "subclasses":"subclasses6", "data properties":"data properties6", "data objects":"data objects6"},
+			{"subclasse":"subclasse7", "prefered name":"prefered name7","data credits" : "data credits7", "notation": "notation7", "label":"label7", "subclasses":"subclasses7", "data properties":"data properties7", "data objects":"data objects7"},
+			{"subclasse":"subclasse8", "prefered name":"prefered name8","data credits" : "data credits8", "notation": "notation8", "label":"label8", "subclasses":"subclasses8", "data properties":"data properties8", "data objects":"data objects8"},
+			{"subclasse":"subclasse9", "prefered name":"prefered name9","data credits" : "data credits9", "notation": "notation9", "label":"label9", "subclasses":"subclasss9", "data properties":"data properties9", "data objects":"data objects9"}
+		],
+		"class2":[
+			{"subclasse":"subclasse11", "prefered name":"prefered name1","data credits" : "data credits11", "notation": "notation1", "label":"label1", "subclasses":"subclasses1", "data properties":"data properties1", "data objects":"data objects1"},
+			{"subclasse":"subclasse21", "prefered name":"prefered name2","data credits" : "data credits21", "notation": "notation2", "label":"label2", "subclasses":"subclasses2", "data properties":"data properties2", "data objects":"data objects2"},
+			{"subclasse":"subclasse31", "prefered name":"prefered name3","data credits" : "data credits31", "notation": "notation3", "label":"label3", "subclasses":"subclasses3", "data properties":"data properties3", "data objects":"data objects3"},
+			{"subclasse":"subclasse41", "prefered name":"prefered name4","data credits" : "data credits41", "notation": "notation4", "label":"label4", "subclasses":"subclasses4", "data properties":"data properties4", "data objects":"data objects4"},
+			{"subclasse":"subclasse51", "prefered name":"prefered name5","data credits" : "data credits51", "notation": "notation5", "label":"label5", "subclasses":"subclasses5", "data properties":"data properties5", "data objects":"data objects5"},
+			{"subclasse":"subclasse61", "prefered name":"prefered name6","data credits" : "data credits61", "notation": "notation6", "label":"label6", "subclasses":"subclasses6", "data properties":"data properties6", "data objects":"data objects6"},
+			{"subclasse":"subclasse71", "prefered name":"prefered name7","data credits" : "data credits71", "notation": "notation7", "label":"label7", "subclasses":"subclasses7", "data properties":"data properties7", "data objects":"data objects7"},
+			{"subclasse":"subclasse81", "prefered name":"prefered name8","data credits" : "data credits81", "notation": "notation8", "label":"label8", "subclasses":"subclasses8", "data properties":"data properties8", "data objects":"data objects8"},
+			{"subclasse":"subclasse91", "prefered name":"prefered name9","data credits" : "data credits91", "notation": "notation9", "label":"label9", "subclasses":"subclasss9", "data properties":"data properties9", "data objects":"data objects9"}
+		],
+		"class3":[
+			{"subclasse":"subclasse12", "prefered name":"prefered name1","data credits" : "data credits12", "notation": "notation1", "label":"label1", "subclasses":"subclasses1", "data properties":"data properties1", "data objects":"data objects1"},
+			{"subclasse":"subclasse22", "prefered name":"prefered name2","data credits" : "data credits22", "notation": "notation2", "label":"label2", "subclasses":"subclasses2", "data properties":"data properties2", "data objects":"data objects2"},
+			{"subclasse":"subclasse23", "prefered name":"prefered name3","data credits" : "data credits32", "notation": "notation3", "label":"label3", "subclasses":"subclasses3", "data properties":"data properties3", "data objects":"data objects3"},
+			{"subclasse":"subclasse42", "prefered name":"prefered name4","data credits" : "data credits42", "notation": "notation4", "label":"label4", "subclasses":"subclasses4", "data properties":"data properties4", "data objects":"data objects4"},
+			{"subclasse":"subclasse25", "prefered name":"prefered name5","data credits" : "data credits52", "notation": "notation5", "label":"label5", "subclasses":"subclasses5", "data properties":"data properties5", "data objects":"data objects5"},
+			{"subclasse":"subclasse62", "prefered name":"prefered name6","data credits" : "data credits62", "notation": "notation6", "label":"label6", "subclasses":"subclasses6", "data properties":"data properties6", "data objects":"data objects6"},
+			{"subclasse":"subclasse27", "prefered name":"prefered name7","data credits" : "data credits72", "notation": "notation7", "label":"label7", "subclasses":"subclasses7", "data properties":"data properties7", "data objects":"data objects7"},
+			{"subclasse":"subclasse82", "prefered name":"prefered name8","data credits" : "data credits82", "notation": "notation8", "label":"label8", "subclasses":"subclasses8", "data properties":"data properties8", "data objects":"data objects8"},
+			{"subclasse":"subclasse29", "prefered name":"prefered name9","data credits" : "data credits92", "notation": "notation9", "label":"label9", "subclasses":"subclasss9", "data properties":"data properties9", "data objects":"data objects9"}
+		]
+	}
+},
+
+"ecrire":{
+	"extraction":{
+		"configuration": {
+			"language":["java","python"],
+			"model":["model1","model2"] ,
+			"term_labeling": {
+				"concepts":[],
+				"data_properties":[],
+				"object_properties":[] 
+			}
+		},
+		"summary": {
+			"details":[] 
+		}
+	},
+	"model":{
+		"regex": {
+			"language": [],
+			"definition":[] ,
+			"extraction":[]
+		},
+		"hmm": {
+			"language":[] ,
+			"hmm_states": {
+				"pre":[],
+				"target":[],
+				"post":[],
+				"other":[]
+			},
+			"file":[] ,
+			"code":[] ,
+			"algorythm":[],
+			"hmm_parameters": {
+				"init": [],
+				"transition":[] ,
+				"observation":{
+					"pre": [],
+					"target":[],
+					"post":[],
+					"other":[]
+				}
+			}
+		} 
+	}
+}
+}

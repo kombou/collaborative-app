@@ -1,0 +1,523 @@
+<button class="pull-right btn btn-primary">
+    <span class="float-left btn btn-primary"><h4><%=project.desc_project %></h4></span>
+    <span class="float-right btn btn-secondary " data-toggle="modal" data-target="#participants"> Particpants(<%=userss.length%>)</span>
+</button>
+<div class=" mt-1">
+
+        <ul class="nav nav-tabs  mt-3" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#configurations" role="tab" data-toggle="tab">Configurations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#terms" role="tab" data-toggle="tab">Terms</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#summary" role="tab" data-toggle="tab">Summary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#statistiques" role="tab" data-toggle="tab">Statistiques</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#classes" role="tab" data-toggle="tab">Classes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#axiomes" role="tab" data-toggle="tab">Axiomes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#rules" role="tab" data-toggle="tab">Rules</a>
+            </li>
+        </ul>
+        <div class="tab-content container">
+            <!--Configurations tabs-->
+
+            <div role="tabpanel" class="tab-pane  active " id="configurations">
+                <label class="mt-4 mb-3" for="model" style="font-weight: bold"> Language/Model</label>
+                <div class="row ">
+                    <div class="col-sm-4">
+                        <label style="color:black">Language </label> <br>
+                        <select class="custom-select">
+                            <option>Choose a language</option>
+                            <option value="1">java</option>
+                            <option value="2">php</option>
+                            <option value="3">javascript</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label style="color:black">Model </label> <br>
+                        <select class="custom-select">
+                            <option>Choose a model</option>
+                            <option value="1">model 1</option>
+                            <option value="2">model 2</option>
+                            <option value="3">model 3</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- info sur le model-->
+                <div class="mt-3">
+                    <label for="model" style="font-weight: bold"> View Model</label>
+                    
+                    <div style="border:1px solid grey" >
+                        <textarea class="form-control" id="model" rows="5" style="width: 45.5em !important;"> </textarea>
+                    </div>
+                  </div>
+                <div class="mt-3">
+                    <label style="font-weight: bold">Temrs labeling</label>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label style="color:black">Meta-knowledge for concepts</label>
+                            <input class="form-control" type="text" id="concepts">
+                        </div>
+                        <div class="col-sm-4">
+                            <label style="color:black">Meta-knowledge for data properties</label>
+                            <input class="form-control" type="text" id="properties">
+                        </div>
+                        <div class="col-sm-4">
+                            <label style="color:black">Meta-knowledge for objects properties</label>
+                            <input class="form-control" type="text" id="objects">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label style="color:black; font-weight: bold">Knowledge Source</label> <br>
+                    <div class="mt-2 custom-file" style="width: 28em !important;">
+                        <label style="color:black" class="custom-file-label">choose a file</label> <br>
+                        <input type="file" class="custom-file-input" onchange="selectFolder(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+                    </div>
+                </div>
+
+                <div class="mt-3 mb-3 row" >
+                    <span class="col-md-6" ><button class="btn btn bg-save  " type="submit">Save</button></span>
+                    <span class="col-md-6" ><button class="btn bg-cancel " type="submit">Cancel</button></span>
+                </div>
+            </div>
+
+            <!--Terms Tabs-->
+
+            <div role="tabpanel" class="tab-pane fade " id="terms">
+                <div class="row mt-4">
+                    <div class="col-sm-7">
+
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control" placeholder="Search" type="search">
+                    </div>
+                    <div class="">
+                        <button class="btn bg-save" type="submit">Search</button>
+                    </div>
+                </div>
+                <div >
+                    <!-- Example row of columns -->
+                    <div class="row mt-5">
+                        <% 
+
+                        for (let index = 0; index < datas.terms.length; index++) {
+                            const element = datas.terms[index];                    
+                    %>
+                            <div class="col-md-3 ml-5 mb-3">
+                                <div class="card shadow " style="width:250px">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style=" font-weight: bold">
+                                            <%= element.name  %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <label style="color:black; font-weight: bold">Validate: </label> <label style="color:black"><%= element.validate %> </label><br>
+                                            <label style="color:black; font-weight: bold">Type: </label> <label style="color:black"><%= element.type %> </label><br>
+                                            <label style="color:black; font-weight: bold">Comments: </label> <label style="color:black"><%= element.comments %> </label><br>
+                                        </p>
+                                        <a href="#" class="card-link"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="card-link"><i style="color:red" class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <%  
+                        }
+                    %>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 mt-3 d-flex justify-content-center">
+                            <nav aria-label="Page navigation example" class="">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous" style="color:black;">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a style="color:black" class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a style="color:black" class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a style="color:black" class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next" style="color:black">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <button class="btn bg-save pl-5 pr-5 " type="submit" data-toggle="modal" data-target="#exampleModal">Download</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Choice the file format</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="txt">
+                                    <label class="form-check-label" for="txt">Export to txt</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="owl">
+                                    <label class="form-check-label" for="owl">Export to owl</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rdf">
+                                    <label class="form-check-label" for="rdf">Export to rdf</label>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn bg-save">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Summary tabs-->
+
+            <div role="tabpanel" class="tab-pane fade  " id="summary">
+                <h4 style="color:black; font-weight: bold" class="mt-4">Details</h4>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="description">Description</label>
+                        <div style="border:2px solid black ;border-radius: 4px" >
+                                <textarea class="form-control green-border-focus" id="description_details" rows="6"> </textarea>
+                          
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="acronym">Acronym</label>
+                        <input id="acronym" class="form-control green-border-focus" type="text">
+
+                        <label for="categories" class="mt-4">Categories</label>
+                        <input id="categories" class="form-control green-border-focus" type="text">
+
+                        <label for="licence" class="mt-4">Licence</label>
+                        <input id="licence" class="form-control green-border-focus" type="text">
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="visibility">Visibility</label>
+                        <select class="custom-select" id="visibility">
+                                <option>...</option>
+                                <option value="1">visibility 1</option>
+                                <option value="2">visibility 2</option>
+                                <option value="3">visibility 3</option>
+                            </select>
+                        <label for="status" class="mt-4">Status</label>
+                        <input id="status" class="form-control green-border-focus" type="text">
+
+                        <label for="contacts" class="mt-4">Contacts</label>
+                        <input id="contacts" class="form-control green-border-focus" type="text">
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:black; font-weight: bold" class="mt-4 mb-4">Metrics</h4>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Terms</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Meta-knowledge</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Classes</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Individuels</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Data Properties</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Objects Properties</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Axiomes</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Classes</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Sub Classes</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style=" font-weight: bold">Sub Properties</h5>
+                                    <p class="card-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 mb-4">
+                    <h4 style="color:black; font-weight: bold">Submissions</h4>
+                    <table class="table ml-3 mr-5">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Version</th>
+                                <th scope="col">Release</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lorem</td>
+                                <td>Lorem</td>
+                                <td>Lorem</td>
+                                <td>Lorem</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!--Statistique tabs-->
+
+            <div role="tabpanel" class="tab-pane fade  " id="statistiques">
+                <label>statistiques</label>
+            </div>
+
+            <!--classes-->
+
+            <div role="tabpanel" class="tab-pane fade  " id="classes">
+                <div class="row p-3">
+                    <div class="col-sm-3 bord">
+                        <ul id="tree1">
+                            <li><a href="#">TECH</a>
+                                <ul>
+                                    <li>Company Maintenance</li>
+                                    <li>Employees
+                                        <ul>
+                                            <li>Reports
+                                                <ul>
+                                                    <li>Report1</li>
+                                                    <li>Report2</li>
+                                                    <li>Report3</li>
+                                                </ul>
+                                            </li>
+                                            <li>Employee Maint.</li>
+                                        </ul>
+                                    </li>
+                                    <li>Human Resources</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-9 p-3">
+                        <h4>Details</h4>
+                        <div class="row">
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Prefered Name</label>
+                                <input class="form-control" type="text" id="name">
+                            </div>
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Prefered Name</label>
+                                <input class="form-control" type="text" id="name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Data credits</label>
+                                <input class="form-control" type="text" id="name">
+                            </div>
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Notation</label>
+                                <input class="form-control" type="text" id="name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Label</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Sub Classes</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Data properties</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-sm-4 mt-3">
+                                <label for="name">Objects Properties</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- axiomes tabs-->
+
+            <div role="tabpanel" class="tab-pane fade  " id="axiomes">
+                <label>Axiomes</label>
+            </div>
+
+            <!-- rules tabs-->
+
+            <div role="tabpanel" class="tab-pane fade  " id="rules">
+                <label>rules</label>
+            </div>
+            <div class="modal fade" id="participants" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog " role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="exampleModalLabel">Participants(<%=userss.length%>)</h3>
+                          <button type="button" class="close" data-dismiss="modal" >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                  
+                        </div>
+                        <div class="modal-body">
+                                <ul class="nav nav-tabs  " role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link  active" href="#listParticipants" role="tab" data-toggle="tab">list</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="#ajouterParticipants" role="tab" data-toggle="tab">ajouter</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane  active " id="listParticipants">
+                                           <div class="list-group">
+                                                     
+                                                  <% 
+                                                      for (let index = 0; index < userss.length; index++) {
+                                                  %>   
+                                                    <a href="#"  style="color:black" class="list-group-item ">
+                                                        <h4  class="list-group-item-heading"><%=userss[index].username %> </h4>
+                                                         <p  style="color:gray" class="list-group-item-text"><%=userss[index].email %></p>
+                                                    </a>
+                                                    <%}%>
+                                                  </div>
+                                    
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane " id="ajouterParticipants">
+                                            <div class="form-group mt-3">
+                                                    <input type="text" onkeypress="searchUser(this.value)" name="invitations" placeholder="rechercher un collaborateur" class="form-control">
+                                            </div>
+                                            <div id="draft-participants">
+
+                                            </div>
+                                           
+                                    </div>
+                                </div>
+
+                                </div>
+                      </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <span style="display:none" id="roomID" ><%=room %></span>
+    <span style="display:none" id="userID"><%=user.id %></span>
+    <span style="display:none" id="userName"><%=user.username %></span>
+        <%- include chat.ejs %>
+
+            <script src="../js/jquery.min.js"></script>
+            <script src="../js/popper.min.js"></script>
+            <script src="../js/tree.js"></script>
+            <script src="../bootstrap-4.1.2-dist/js/bootstrap.min.js"></script>
+           
+            
+            </body>
+
+            </html>

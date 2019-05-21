@@ -1,0 +1,112 @@
+h5, .footer li a{
+    color: white;
+}
+a{
+    color: white
+}
+h6{
+    font-weight: bold;
+}
+.ml-7{
+    margin-left: 70px;
+}
+.pt-7{
+    padding-top: 70px;
+}
+.aurelle {
+    background-color: #24004d !important;
+}
+.nav-item:hover{
+    box-shadow: 0 0 0 0.2rem rgba(138, 79, 194, 0.25) !important;
+    color: #24004d !important;
+}
+.content .head-cont button{
+    color: #24004d;
+}
+
+.head-cont{
+    background-color: #24004d  !important;
+   
+}
+h1 ,  h3{
+     color: white;
+ 
+ } 
+ /*.content .head-cont img{
+     margin-left: 225px;
+     margin-top: 100px;
+ }*/
+ .mt-7{
+     margin-top: 300px;
+}
+ .sign{
+    margin: 100px ;
+ }
+ .service {
+     margin: 50px;
+ }
+h4{
+    text-align: left;
+
+}
+.card{
+    margin-left: 130px;
+}
+button{
+    color: white;
+}
+.form-control:focus {
+    border: 1px solid #24004d;
+    box-shadow: 0 0 0 0.2rem rgba(138, 79, 194, 0.25);
+}
+.footer{
+    background-color: #262626;
+    width: 100%;
+}
+
+.footer ul {
+  text-decoration: none !important;
+}
+.copyDiv{
+    background-color: #0d0d0d;
+}
+.copy{
+    color: gray;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.icay{
+    width: 140px;
+    display: inline-block;
+    margin-left: -16px;
+    margin-right: 5px;
+}
+
+
+.dropdown{
+	position: relative;
+	display: inline-block;
+}
+.nav-link{
+	border:none;
+}
+.nav-link:hover{
+    color: white;
+}
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+.login-register-btn a{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.login-register-btn a:hover{
+    color: gray;
+}
+
+.search-form-area{
+    visibility: hidden;
+}

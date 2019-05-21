@@ -1,0 +1,220 @@
+h5, .footer li a{
+    color: white;
+}
+a{
+    color: white
+}
+.ml-7{
+    margin-left: 70px;
+}
+.mr-7{
+    margin-right: 70px;
+}
+.ml-10{
+    margin-left: 300px;
+}
+.aurelle {
+    background-color: #24004d !important;
+}
+.nav-item:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+    color: #24004d !important;
+}
+.fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 20px;
+   
+  }
+#chat-div{
+    margin-right: 30px;
+    bottom: 0;
+    width: 40%;
+    right: 0;
+    position: fixed;
+    visibility: hidden;
+    background-color: white;
+    box-shadow: 0 0 0.4rem 0.4rem rgba(63, 68, 58, 0.25) !important;
+}
+.title{
+    font-weight: bold;
+
+}
+.message-div{
+    height: 400px;
+    
+   
+    
+}
+.message-send{
+    border: 1px solid rgba(63, 68, 58, 0.25);
+    border-radius: 8px;
+}
+.message-receive{
+    border: 1px solid #24004d;
+    border-radius: 8px;
+    background-color:  rgba(63, 68, 58, 0.25);
+
+}
+.head{
+    position: relative;
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.head:after {
+    content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: linear-gradient(to bottom right, #1a8531, #0d6620);
+   opacity: 0.6;/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
+ .login-register-btn a{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.login-register-btn a:hover{
+    color: gray;
+}
+
+.search-form-area{
+    visibility: hidden;
+}
+.footer{
+    background-color: #262626;
+    width: 100%;
+}
+.footer ul {
+  text-decoration: none !important;
+}
+.copyDiv{
+    background-color: #0d0d0d;
+}
+.copy{
+    color: gray;
+    text-align: center;
+    font-size: 0.8em;
+}
+.bg-green {
+    background-color: #24004d !important;
+}
+ 
+
+h5{
+     color: black;
+     font-weight: bold;
+     
+ }
+ .bg-save{
+    color:white; 
+    background-color: #24004d !important;
+    
+}
+.bg-cancel{
+    color: #24004d;
+    border: 1Px solid #24004d !important;
+    background-color: white;
+}
+
+.bg-save:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+}
+
+.bg-cancel:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+}
+.col-sm-4  .form-control:focus{
+    border: 1px solid #24004d;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+
+.green-border-focus .form-control:focus {
+    border: 1px solid #24004d;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+
+select:focus{
+    border: 1px solid #24004d !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25) !important;
+}
+select:active{
+    background-color: rgba(139, 195, 74, .25) !important;
+}
+.card{
+      box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+}
+.bord{
+    border-right: 1px solid gray;
+}
+
+/*  */
+.tree, .tree ul {
+    margin:0;
+    padding:0;
+    list-style:none
+}
+.tree ul {
+    margin-left:1em;
+    position:relative
+}
+.tree ul ul {
+    margin-left:.5em
+}
+.tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:1px solid
+}
+.tree li {
+    margin:0;
+    padding:0 1em;
+    line-height:2em;
+    color: black;
+    font-weight:700;
+    position:relative
+}
+.tree ul li:before {
+    content:"";
+    display:block;
+    width:10px;
+    height:0;
+    border-top:1px solid;
+    margin-top:-1px;
+    position:absolute;
+    top:1em;
+    left:0
+}
+.tree ul li:last-child:before {
+    background:#fff;
+    height:auto;
+    top:1em;
+    bottom:0
+}
+.indicator {
+    margin-right:5px;
+}
+.tree li a {
+    text-decoration: none;
+    color:black;
+}
+.tree li button, .tree li button:active, .tree li button:focus {
+    text-decoration: none;
+    color:#24004d;
+    border:none;
+    background:transparent;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    outline: 0;
+}

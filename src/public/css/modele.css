@@ -1,0 +1,128 @@
+
+h5, .footer li a{
+    color: white;
+}
+a{
+    color: white
+}
+
+.ml-7{
+    margin-left: 70px;
+}
+.aurelle {
+    background-color: #24004d !important;
+}
+.nav-item:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+    color: #24004d !important;
+}
+.regex::after , .hmm::after{
+    border-bottom: 1px #24004d solid;
+}
+
+.head{
+    position: relative;
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.head:after {
+    content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: linear-gradient(to bottom right, #1a8531, #0d6620);
+   opacity: 0.6;/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
+ .login-register-btn a{
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.login-register-btn a:hover{
+    color: gray;
+}
+
+.search-form-area{
+    visibility: hidden;
+}
+.footer{
+    background-color: #262626;
+    width: 100%;
+}
+.footer ul {
+  text-decoration: none !important;
+}
+.copyDiv{
+    background-color: #0d0d0d;
+}
+.copy{
+    color: gray;
+    text-align: center;
+    font-size: 0.8em;
+}
+.bg-green {
+   background-color: #24004d !important;
+}
+
+
+h5{
+    color: black;
+    font-weight: bold;
+    
+}
+
+p{
+    color: black;
+}
+.green-border-focus .form-control:focus {
+    border: 1px solid #24004d;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+select{
+    width: 28em !important;
+}
+select:focus{
+    border: 1px solid #24004d !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25) !important;
+}
+select:active{
+    background-color: rgba(139, 195, 74, .25) !important;
+}
+
+.bg-save{
+    color:white; 
+    background-color: #24004d !important;
+    
+}
+.bg-cancel{
+    color: #24004d;
+    border: 1Px solid #24004d !important;
+    background-color: white;
+}
+
+.bg-save:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+}
+
+.bg-cancel:hover{
+    box-shadow: 0 0 0.4rem 0.4rem rgba(139, 195, 74, .25) !important;
+}
+.col-sm-3 .form-control:focus{
+    border: 1px solid #24004d;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+.loadfile{
+    width: 28em !important;
+    color: #24004d !important;
+
+}
+#parameters{
+  display: none;
+}
+
+

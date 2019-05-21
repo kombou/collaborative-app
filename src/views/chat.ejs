@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>chat</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/dolphin.png" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/extraction.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap-4.1.2-dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap-4.1.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-5.6.3-web/css/all.css">
+    <link rel="stylesheet" href="../fontawesome-free-5.6.3-web/js/all.js">
+    <link rel="stylesheet" href="../aos-master/dist/aos.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div class="fixed">
+        <button class="btn aurelle" onclick="showchat()" id="button" style="color:white">Discuss with collaborator   <i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+    </div>
+    <div id="chat-div">
+        <div class="p-3 input-group" style="border-bottom: 1px solid black ;width:100%">
+            <h5 class="title">Message</h5>
+            <span class="pull-right  btn btn-danger"  id="close-message" onclick="closechat()">
+			        <span aria-hidden="true">&times;</span>
+            </span>
+        </div>
+        <div id="feedback">
+
+        </div>
+        <p class="message-div p-2" style="overflow-y:auto" id="output">
+
+        </p>
+        <div class="edit-message input-group">
+            <input type="text" placeholder="write a message" class="form-control " id="message">
+            <span class="input-group-btn">
+                    <button class="btn aurelle p-3" id="send"  style="color:white"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
+                </span>
+        </div>
+    </div>
+
+    <!--<script src="client.js"></script>-->
+   
+
+    <script src="../aos-master/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
