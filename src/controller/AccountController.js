@@ -70,10 +70,10 @@ accountController.logout = (req, res) => {
     res.redirect("/user")
 };
 
-accountController.searchByKeyword =(req, res) => {
+accountController.searchByKeyword = (req, res) => {
     accountRepository.matchUser(req.params.keyword).then((users) => {
-        res.render("partials/search-participants",{ users:users });
-    
+        res.render("partials/search-participants", { users: users, user: req.session.user });
+
     });
 };
 module.exports = accountController;

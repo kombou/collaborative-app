@@ -8,11 +8,24 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
                 .db("test")
                 .table("chat")
                 .filter({ id_project: id_projet })
-                // .run(conn, (err, users) => {
-                //  if (err) reject(err);
-                //  console.log(users[0]);
-                //  resolve(users[0]);
-                // });
+                .run(conn)
+                .then(function(cursor) {
+                    return cursor.toArray()
+                        .then(function(chat) {
+                            resolve(chat);
+                        });
+                })
+                .catch(function(err) {
+                    reject(err);
+                });
+        });
+    };
+
+    chatRepository.findAll = () => {
+        return new Promise((resolve, reject) => {
+            r
+                .db("test")
+                .table("chat")
                 .run(conn)
                 .then(function(cursor) {
                     return cursor.toArray()

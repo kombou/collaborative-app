@@ -1,77 +1,78 @@
-<% include partials/header.ejs %>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/modele.css">
-    <div class="collapse aurelle " id="collapseExample">
-        <input type="search" class="form-control" placeholder="enter key word!">
-    </div>
-    <div class="container mt-5">
-        <h2 class="mb-5" style="font-weight: bold; text-align: center">Define Your Model!</h2>
-        <p style=" text-align: center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam , quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fu</p>
-        <ul class="nav nav-tabs mt-5" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" href="#regex" role="tab" data-toggle="tab">Regex</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#hmm" role="tab" data-toggle="tab">HMM</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#constructhmm" role="tab" data-toggle="tab">Construct model</a>
-            </li>
-        </ul>
+<button class="pull-right btn btn-primary">
+    <span class="float-left btn btn-primary"><h4><%=project.desc_project %></h4></span>
+    <span class="float-right btn btn-secondary " data-toggle="modal" data-target="#participants" title="nombre de models"> <i class="fas fa-file-alt fa-2x fa-fw mr-2 text-gray-400" ></i> (<%=model.length %>)</span>
+</button>
+<div class="container mt-5" style="margin:0px !important;padding: 0px !important">
+    <ul class="nav nav-tabs mt-5" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#regex" role="tab" data-toggle="tab">Regex</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#hmm" role="tab" data-toggle="tab">HMM</a>
+        </li>
+    </ul>
 
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active " id="regex">
+    <div class="tab-content" style="margin:0px !important;padding: 0px !important">
+        <div role="tabpanel" class="tab-pane active " id="regex" style="margin:0px !important;padding: 0px !important">
+            <form method="POST" action="/model/regex">
+                <input type="text" name="type" value="regex" style="visibility:hidden !important"><input type="text" name="id_projet" value="<%=project.id %>" style="visibility:hidden !important">
                 <label class="mt-4" style="font-weight: bold">Programming Language 
-                </label> <br>
-                <select class="custom-select">
-                    <option>Choose one language</option>
-                    <option value="1">java</option>
-                    <option value="2">php</option>
-                    <option value="3">javascript</option>
-                </select>
+                            </label> <br>
+                <select class="custom-select" name="language" value="php">
+                                <option value="null">Choose one language</option>
+                                <option value="java">java</option>
+                                <option value="php">php</option>
+                                <option value="javascript">javascript</option>
+                            </select>
                 <div class="row mt-5">
                     <div class="form-group green-border-focus col-sm-5">
                         <label for="define" style="font-weight: bold">Define Model</label>
-                        <textarea class="form-control" id="define" rows="5"></textarea>
+                        <textarea class="form-control" id="define" rows="5" name="definition"></textarea>
                     </div>
                     <div class="form-group green-border-focus col-sm-5">
                         <label for="description" style="font-weight: bold">Description</label>
-                        <textarea class="form-control" id="description" rows="5"></textarea>
+                        <textarea class="form-control" id="description" rows="5" name="description"></textarea>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3 btn-group">
                     <button class="btn bg-save pl-5 pr-5" type="submit">Save</button>
                     <button class="btn bg-cancel pl-5 pr-5 ml-4" type="submit">Cancel</button>
                 </div>
-
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="hmm">
+            </form>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="hmm" style="margin:0px !important;padding: 0px !important">
+            <form method="POST" action="/model/hmm">
+                <input type="text" name="type" value="hmm" style="visibility:hidden !important"><input type="text" name="id_projet" value="<%=project.id %>" style="visibility:hidden !important">
                 <label class="mt-4" style="font-weight: bold">Programming Language 
-                </label> <br>
-                <select class="custom-select">
-                    <option>Choose one language</option>
-                    <option value="1">java</option>
-                    <option value="2">php</option>
-                    <option value="3">javascript</option>
-                </select>
+                            </label> <br>
+                <select class="custom-select" name="language">
+                                <option value="null">Choose one language</option>
+                                <option value="java">java</option>
+                                <option value="php">php</option>
+                                <option value="javascript">javascript</option>
+                            </select>
+                <div class="mt-4">
+                    <label style="font-weight: bold">description Model</label>
+                    <input type="text" class="form-control" name="description">
+                </div>
                 <div class="mt-4">
                     <label style="font-weight: bold">HMM states</label>
                     <div class="row">
                         <div class="col-sm-3">
                             <label>Pre</label><br>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="pre">
                         </div>
                         <div class="col-sm-3">
                             <label>Target</label><br>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="target">
                         </div>
                         <div class="col-sm-3">
                             <label>Post</label><br>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="post">
                         </div>
                         <div class="col-sm-3">
                             <label>Other</label><br>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="other">
                         </div>
 
                     </div>
@@ -81,24 +82,23 @@
                     <label>For model training</label><br>
                     <div class="mt-2 custom-file" style="width: 28em !important;">
                         <label style="color:black" class="custom-file-label">choose a file</label> <br>
-                        <input type="file" class="custom-file-input" onchange="selectFolder(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+                        <input type="file" class="custom-file-input" name="file_training" onchange="selectFolder(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
                     </div>
-                    <button class="btn bg-save pl-5 pr-5" style="margin-left: 144px">Train model</button>
                 </div>
 
                 <div class="mt-4">
                     <label>Choose the training algorithm</label><br>
-                    <select class="custom-select">
-                       <option>algorithm</option>
-                       <option value="1">algorithm 1</option>
-                       <option value="2">algorithm 2</option>
-                       <option value="3">algorithm 3</option>
-                   </select>
-                    <button class="btn bg-save pl-5 pr-5 ml-4">Reference model</button>
+                    <select class="custom-select" name="algo_training">
+                                   <option>algorithm</option>
+                                   <option value="1">algorithm 1</option>
+                                   <option value="2">algorithm 2</option>
+                                   <option value="3">algorithm 3</option>
+                               </select>
                 </div>
-                <div class="mt-3">
-                    <button class="btn bg-save pl-5 pr-5 " onclick="showParameters()" type="submit">Train the model</button>
-                    <button class="btn bg-cancel pl-5 pr-5 ml-4" type="submit">Cancel</button>
+                <div class="mt-3 btn-group">
+                    <button class="btn btn-secondary pl-5 pr-5 ml-4" style="margin-rigth:1.5% !immportant">Reference model</button>
+                    <button type="button" class="btn bg-save pl-5 pr-5 " onclick="showParameters()">Train the model</button>
+                    <button class="btn bg-cancel pl-5 pr-5 ml-4" type="reset">Cancel</button>
                 </div>
                 <div class="mt-5 " id="parameters">
                     <h5 style="color: black; font-weight: bold" class="mb-3">HMM Parameters</h5><br>
@@ -213,61 +213,142 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="mt-3 mb-3">
+                    <div class="mt-3 mb-3 btn-group">
                         <button class="btn bg-save pl-5 pr-5 " type="submit">Save model</button>
-                        <button class="btn bg-cancel pl-5 pr-5 ml-4" type="submit">Cancel</button>
+                        <button class="btn bg-cancel pl-5 pr-5 ml-4" type="reset">Cancel</button>
                     </div>
                 </div>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="constructhmm">
-                <%include drag.ejs %>
-            </div>
+            </form>
+        </div>
 
+    </div>
+</div>
+<div class="modal fade" id="participants" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog mondal-lg " role="document">
+        <div class="modal-content mondal-lg">
+            <div class="modal-header mondal-lg">
+                <button type="button" class="close float-right btn-xs btn" data-dismiss="modal" style="padding: 0px !important">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body mondal-lg">
+                <div class="list-group">
+                    <% 
+                              for (let index = 0; index < model.length; index++) {
+                          %>
+
+                        <p class="list-group-item-heading">
+                            <b>Type Model:</b>
+                            <%=model[index].type %>
+                        </p>
+                        <p style="color:gray" class="list-group-item-text">
+                            <b>Language:</b>
+                            <%=model[index].language %>
+                        </p>
+                        <p style="color:gray" class="list-group-item-text">
+                            <code class="btn btn-warning btn-xs" data-toggle="modal" data-target="#<%=model[index].id %>">more</code>
+                            <div class="modal fade" id="<%=model[index].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog mondal-lg ">
+                                    <div class="modal-content mondal-lg">
+                                        <div class="modal-header mondal-lg">
+                                            <h6 class="modal-title" style="margin-left:20%;margin-right:20%"><b style="float:none !important">More Model Information</b></h6>
+                                        </div>
+                                        <div class="modal-body mondal-lg">
+                                            <%if (model[index].type=='regex'){%>
+                                                <table>
+                                                    <tr>
+                                                        <td><b>type</b></td>
+                                                        <td>
+                                                            <%=model[index].type%>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Language</b></td>
+                                                        <td>
+                                                            <%=model[index].language%>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Definition</b></td>
+                                                        <td>
+                                                            <%=model[index].definition%>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Description</b></td>
+                                                        <td>
+                                                            <%=model[index].description%>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <%}else{%>
+                                                    <table>
+                                                        <tr>
+                                                            <td><b>type</b></td>
+                                                            <td>
+                                                                <%=model[index].type%>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Language</b></td>
+                                                            <td>
+                                                                <%=model[index].language%>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b><u>Definition HMM:</u></b></td>
+                                                            <td>
+                                                                <tr>
+                                                                    <td><b>Pre:</b></td>
+                                                                    <td>
+                                                                        <%=model[index].definition.pre%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Post:</b></td>
+                                                                    <td>
+                                                                        <%=model[index].definition.post%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>target:</b></td>
+                                                                    <td>
+                                                                        <%=model[index].definition.target%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Other:</b></td>
+                                                                    <td>
+                                                                        <%=model[index].definition.other%>
+                                                                    </td>
+                                                                </tr>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p>
+                        <span style="border:1px black solid;width: 100% !important;height: 1px !important;float:right !important"></span>
+
+                        <%}%>
+                </div>
+
+            </div>
         </div>
     </div>
-    <%include partials/footer.ejs %>
-        <% include chat.ejs%>
-            <script src="js/jquery.min.js"></script>
-            <script src="js/popper.min.js"></script>
-            <script src="bootstrap-4.1.2-dist/js/bootstrap.min.js"></script>
-            <script type="text/javascript">
-                function selectFolder(e) {
-                    var theFiles = e.target.files;
-                    var relativePath = theFiles[0].webkitRelativePath;
-                    var folder = relativePath.split("/");
-                    alert(folder[0]);
-                }
+</div>
+<span style="display:none" id="roomID"><%=room %></span>
+<span style="display:none" id="userID"><%=user.id %></span>
+<span style="display:none" id="userName"><%=user.username %></span>
+<% include chat.ejs%>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="bootstrap-4.1.2-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    </script>
+    </body>
 
-                function showParameters() {
-                    document.getElementById("parameters").style.display = "block";
-
-                }
-
-                var socket = io();
-
-                var define = document.getElementById("define");
-                var description = document.getElementById("description");
-
-                //send definition regex to server
-                define.addEventListener('keyup', function() {
-                    socket.emit('define', define.value);
-                });
-
-                //receive definition regex from server
-                socket.on('define', function(data) {
-                    define.value = data
-                });
-
-                //send descerption regex to server
-                description.addEventListener('keyup', function() {
-                    socket.emit('description', description.value);
-                });
-
-                //receive description regex from server
-                socket.on('description', function(data) {
-                    description.value = data
-                });
-            </script>
-            </body>
-
-            </html>
+    </html>

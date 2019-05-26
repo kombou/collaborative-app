@@ -4,23 +4,18 @@ const AccountRepository = require('./AccountRepository');
 
 let associerRepository = {};
 r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
-    associerRepository.findAllUserProjet =   (id_user) => {
+    associerRepository.findAllUserProjet = (id_user) => {
         return new Promise((resolve, reject) => {
             r
                 .db("test")
                 .table("associer")
                 .filter({ id_user: id_user })
-                // .run(conn, (err, users) => {
-                //  if (err) reject(err);
-                //  console.log(users[0]);
-                //  resolve(users[0]);
-                // });
                 .run(conn)
                 .then(function(cursor) {
                     return cursor.toArray()
                         .then(function(associer) {
-                          
-                          
+
+
 
                             resolve(waitCheckAssociation(associer))
 
@@ -37,11 +32,6 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
                 .db("test")
                 .table("associer")
                 .filter({ id_projet: id_projet, id_user: id_user })
-                // .run(conn, (err, users) => {
-                //  if (err) reject(err);
-                //  console.log(users[0]);
-                //  resolve(users[0]);
-                // });
                 .run(conn)
                 .then(function(cursor) {
                     return cursor.toArray()
@@ -61,11 +51,6 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
                 .db("test")
                 .table("associer")
                 .filter({ id_projet: id_projet })
-                // .run(conn, (err, users) => {
-                //  if (err) reject(err);
-                //  console.log(users[0]);
-                //  resolve(users[0]);
-                // });
                 .run(conn)
                 .then(function(cursor) {
                     return cursor.toArray()
@@ -78,6 +63,8 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
                 });
         });
     };
+
+
 
     associerRepository.save = (associer) => {
         return new Promise((resolve, reject) => {
@@ -92,45 +79,51 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
     };
 });
 
-async function waitCheckAssociation(associer){
+async function waitCheckAssociation(associer) {
     userProjet = [];
 
     for (let index = 0; index < associer.length; index++) {
         console.log(associer[index].id_projet);
-        const element = await  checkProject(associer[index].id_projet);
-         
-        if(element!==undefined){
+        const element = await checkProject(associer[index].id_projet);
+
+        if (element !== undefined) {
             userProjet.push(element);
         }
-        
+
     }
-    return userProjet ;
+    return userProjet;
 
 }
-async function waitCheckUser(associer){
+async function waitCheckUser(associer) {
     users = [];
 
     for (let index = 0; index < associer.length; index++) {
-       
-        const element = await  checkUser(associer[index].id_user);
-         
-        if(element!==undefined){
+
+        const element = await checkUser(associer[index].id_user);
+
+        if (element !== undefined) {
             users.push(element);
         }
-        
+
     }
-    return users ;
+    return users;
 
 }
-function checkProject(id_projet){
-    return new Promise (resolve => { ProjetRepository.findByIdProjet(id_projet).then((projet) => {
-        resolve(projet);
-    })});
+
+function checkProject(id_projet) {
+    return new Promise(resolve => {
+        ProjetRepository.findByIdProjet(id_projet).then((projet) => {
+            resolve(projet);
+        })
+    });
 }
-function checkUser(id_user){
-    return new Promise (resolve => { AccountRepository.findById(id_user).then((user) => {
-        resolve(user);
-    })});
+
+function checkUser(id_user) {
+    return new Promise(resolve => {
+        AccountRepository.findById(id_user).then((user) => {
+            resolve(user);
+        })
+    });
 }
 
 

@@ -1,78 +1,95 @@
 <!<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Extract data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="img/dolphin.png" type="image/x-icon"/>
+    <link rel="shortcut icon" href="img/dolphin.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="bootstrap-4.1.2-dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="bootstrap-4.1.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome-free-5.6.3-web/css/all.css">
     <link rel="stylesheet" href="fontawesome-free-5.6.3-web/js/all.js">
-    <link rel="stylesheet"  href="aos-master/dist/aos.css">
+    <link rel="stylesheet" href="aos-master/dist/aos.css">
     <script src="/socket.io/socket.io.js"></script>
-    <script> var socket = io('/extraction');</script>
+    <script>
+        var socket = io('/extraction');
+    </script>
     <script src="js/go-debug.js"></script>
     <script src="js/Robot.js"></script>
     <script id="code">
-      var robot;
-      function init(){
-        var $ = go.GraphObject.make;
-    
-        function nodeClicked(e, obj){
-          var evt = e.copy();
-          var node = obj.part();
-          var type = evt.clickCount === 2 ? "Double-Clicked: " : "Clicked: ";
-          var msg = type + node.data.key +" .";
+        var robot;
+
+        function init() {
+            var $ = go.GraphObject.make;
+
+            function nodeClicked(e, obj) {
+                var evt = e.copy();
+                var node = obj.part();
+                var type = evt.clickCount === 2 ? "Double-Clicked: " : "Clicked: ";
+                var msg = type + node.data.key + " .";
+            }
+            myDiagram =
+                $(go.Diagram, "myDiagramDiv", {
+                    nodeTemplate: $(go.Node, "Auto", {
+                            click: nodeClicked,
+                            doubleClick: nodeClicked,
+
+                        },
+                        $(go.Shape, "Circle", {
+                            fill: "lightgray",
+                        }, {
+                            portId: "",
+                            fromLinkable: true,
+                            toLinkable: true,
+                            cursor: "pointer"
+                        }),
+                        $(go.TextBlock, {
+                                margin: 3
+                            },
+                            new go.Binding("text", "key"))),
+                    "undoManager.isEnabled": true
+                });
+            robot = new Robot(myDiagram);
+            myPalette =
+                $(go.Palette, "myPaletteDiv", {
+                    nodeTemplate: myDiagram.nodeTemplate,
+                    model: new go.GraphLinksModel([{
+                        key: "Pre"
+                    }, {
+                        key: "Target"
+                    }, {
+                        key: "Post"
+                    }, {
+                        key: "Other"
+                    }, {
+                        key: "Param"
+                    }, ])
+                });
+
+            function dragFromPalette() {
+                var dragdrop = {
+                    sourceDiagram: myPalette,
+                    targetDiagram: myDiagram
+                };
+                robot.mouseDown(10, 5, 20, dragdrop);
+                robot.mouseMove(60, 60, 100, dragdrop);
+                robot.mouseUp(100, 100, 200, dragdrop);
+            }
+
+            function deleteSelection() {
+                robot.keyDown("Del");
+                robot.keyUp("Del");
+            }
         }
-        myDiagram = 
-        $(go.Diagram, "myDiagramDiv", {
-          nodeTemplate: 
-          $(go.Node, "Auto", 
-          {
-            click: nodeClicked, 
-            doubleClick: nodeClicked,
-    
-          }, 
-        $(go.Shape, "Circle",
-          { fill: "lightgray", }, 
-          {portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"} ),
-          $(go.TextBlock, 
-          {margin: 3},
-          new go.Binding("text", "key"))),
-          "undoManager.isEnabled": true
-        });
-        robot = new Robot(myDiagram);
-        myPalette = 
-        $(go.Palette, "myPaletteDiv", 
-        {
-          nodeTemplate : myDiagram.nodeTemplate, 
-          model: new go.GraphLinksModel([
-            {key: "Pre"},
-            {key: "Target"},
-            {key: "Post"},
-            {key: "Other"},
-            {key: "Param"},
-          ])
-        });
-        function dragFromPalette(){
-          var dragdrop = { sourceDiagram: myPalette, targetDiagram: myDiagram };
-          robot.mouseDown(10, 5, 20, dragdrop);  
-          robot.mouseMove(60, 60, 100, dragdrop);
-          robot.mouseUp(100, 100, 200, dragdrop);
-        }
-        function deleteSelection(){
-          robot.keyDown("Del");
-          robot.keyUp("Del");
-        }
-      }
     </script>
 </head>
+
 <body onload="init()">
-  <nav class=" aurelle navbar sticky-top navbar-expand  navbar-dark" >
-    <a class="navbar-brand" href="/accueil"><span><img width="45" height="45"  src="../img/dolphin.png" /></span><h4 style="color : white !important; ">Source2onto</h4></a>
+    <nav class=" aurelle navbar sticky-top navbar-expand  navbar-dark">
+        <a class="navbar-brand" href="/"><span><img width="45" height="45"  src="../img/dolphin.png" /></span><h4 style="color : white !important; ">Source2onto</h4></a>
 
 
         <!-- Menu Area -->
@@ -80,32 +97,36 @@
 
         <div class="collapse navbar-collapse justify-content-end container-fluid" id="mosh-navbar">
             <ul class="navbar-nav animated" id="nav">
-                <li class="nav-item active"><a class="nav-link" href="/accueil">Home</a></li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" >
-                            Develop </a>
-                          <div class="dropdown-menu">
-                              <a class="dropdown-item" href="/model">Define your model</a>
-                              <a class="dropdown-item" href="/extraction">Extractions</a>
+                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user fa-lg fa-fw mr-2 text-gray-400"></i>
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-                          </div>
-                        </li>
-                     
-                    
-                     
-                      <li class="nav-item">
-                        <span class="nav-link"><%= user.username %></span>
-                      </li>
-                      <li class="nav-item">
-                       <a class="nav-link" href="/user/logout">Deconexion</a>
-                      </li>
+                        <a class="dropdown-item" href="#">
+
+                            <i class="fas fa-laugh-wink fa-xs"></i>
+                            <span class="text-center center-block content-center"><%= user.username %></span>
+                        </a>
+                        <a class="dropdown-item">
+                            <i class="fas fa-envelope fa-xs fa-fw mr-2 text-gray-400"></i>
+                            <%= user.email %>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/logout" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-xs fa-fw mr-2 text-gray-400"></i> Logout
+                        </a>
+                    </div>
+                </li>
             </ul>
         </div>
-      </nav>
-       
-         
- <!--<span class="text-danger text-sm-center">
+    </nav>
+
+
+    <!--<span class="text-danger text-sm-center">
     <% if(locals.flash && locals.flash.error) { %>
     <%= flash.error%>
     <% } %>-->
-</span>
+    </span>

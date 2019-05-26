@@ -52,6 +52,25 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
         });
     };
 
+    accountRepository.findAll = () => {
+        return new Promise((resolve, reject) => {
+            r
+                .db("test")
+                .table("users")
+                .run(conn)
+                .then(function(cursor) {
+                    return cursor.toArray()
+                        .then(function(users) {
+                            resolve(users);
+                        });
+                })
+                .catch(function(err) {
+                    reject(err);
+                });
+        });
+    };
+
+
     accountRepository.save = (account) => {
         return new Promise((resolve, reject) => {
             r

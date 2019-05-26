@@ -1,108 +1,127 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Extract data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" href="../img/dolphin.png" type="image/x-icon"/>
+    <link rel="shortcut icon" href="../img/dolphin.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.1.2-dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../bootstrap-4.1.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome-free-5.6.3-web/css/all.css">
     <link rel="stylesheet" href="../fontawesome-free-5.6.3-web/js/all.js">
-    <link rel="stylesheet"  href="../aos-master/dist/aos.css">
-    <link rel="stylesheet" type="text/css"  href="../css/projectList.css">
+    <link rel="stylesheet" href="../aos-master/dist/aos.css">
+    <link rel="stylesheet" type="text/css" href="../css/projectList.css">
     <script src="/socket.io/socket.io.js"></script>
-    <script> var socket = io('/extraction');</script>
+    <script>
+        var socket = io('/extraction');
+    </script>
 
 </head>
+
 <body>
-    <nav class=" aurelle navbar sticky-top navbar-expand  navbar-dark" >
+    <nav class=" aurelle navbar sticky-top navbar-expand  navbar-dark">
         <a class="navbar-brand" href="/accueil"><span><img width="45" height="45"  src="../img/dolphin.png" /></span><h4 style="color : white !important; ">Source2onto</h4></a>
+        <!-- Menu Area -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mosh-navbar" aria-controls="mosh-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse justify-content-end container-fluid" id="mosh-navbar">
+            <ul class="navbar-nav animated" id="nav">
+                <li class="nav-item active"><a class="nav-link" href="/accueil">Home</a></li>
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user fa-2x fa-fw mr-2" style="color:#fff"></i>
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                        <a class="dropdown-item" href="#">
+
+                            <i class="fas fa-laugh-wink fa-xs"></i>
+                            <span class="text-center center-block content-center"><%= user.username %></span>
+                        </a>
+                        <a class="dropdown-item">
+                            <i class="fas fa-envelope fa-xs fa-fw mr-2 text-gray-400"></i>
+                            <%= user.email %>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/logout">
+                            <i class="fas fa-sign-out-alt fa-xs fa-fw mr-2 text-gray-400"></i> Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 
-            <!-- Menu Area -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mosh-navbar" aria-controls="mosh-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-
-            <div class="collapse navbar-collapse justify-content-end container-fluid" id="mosh-navbar">
-                <ul class="navbar-nav animated" id="nav">
-                    <li class="nav-item active"><a class="nav-link" href="/accueil">Home</a></li>
-                          <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" >
-                                Develop </a>
-                              <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="/model">Define your model</a>
-                                  <a class="dropdown-item" href="/extraction">Extractions</a>
-
-                              </div>
-                            </li>
-                         
-                        
-                         
-                          <li class="nav-item">
-                            <span class="nav-link"><%= user.username %></span>
-                          </li>
-                          <li class="nav-item">
-                           <a class="nav-link" href="/user/logout">Deconexion</a>
-                          </li>
-                </ul>
-            </div>
-          </nav>
-         
-         
- <!--<span class="text-danger text-sm-center">
+    <!--<span class="text-danger text-sm-center">
     <% if(locals.flash && locals.flash.error) { %>
     <%= flash.error%>
     <% } %>-->
-</span>
+    </span>
 
-<div class="row mt-4 contentproject ">
-    <div class="col-3 ">
-      <div class="nav flex-column nav-pills list pr-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link mb-3 active" style="color: #007bff; background-color: #fff !important; cursor: pointer;  "  data-toggle="modal" data-target="#createProject"   role="tab" aria-selected=" false"> + New Project</a>
-        
-        <% 
+    <div class="row mt-4 contentproject ">
+        <div class="col-3 ">
+            <div class="nav flex-column nav-pills list pr-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link mb-3 active" style="color: #007bff; background-color: #fff !important; cursor: pointer;  " data-toggle="modal" data-target="#createProject" role="tab" aria-selected=" false"> + New Project</a>
+
+                <% 
         for (let index = 0; index < projects.length; index++) {
                                
     %>
-        <a  onclick="loadProject('<%=projects[index].id%>')"  class="nav-link mb-3 projectItem" style="color: Black;" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false"><%= projects[index].desc_project %></a>
-        
-      <%}%>
-      </div>
-    </div>
-    <div class="col-9">
-      <div class="tab-content" id="v-pills-tabContent">
-          <div class="tab-pane fade show active text-center" > <h4 class="mt-7" style="color: rgb(180, 180, 180)">
-            Please select a project or create a project</h4></div>
-        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"> 
-          
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#<%=projects[index].id%>">
+                            <i class="fas fa-folder-open fa-cog"></i>
+                            <span> <%= projects[index].desc_project %></span>
+                        </a>
+                        <div id="<%=projects[index].id%>" class="dropdown-menu">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Develop your
+                                    <%= projects[index].desc_project %> project:</h6>
+                                <a class="dropdown-item" onclick="loadProject('<%=projects[index].id%>')" style="color: Black;" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false"> <i class="fas fa-thumbtack fa-cog"></i> Extraction</a>
+                                <a class="dropdown-item" onclick="loadModel('<%=projects[index].id%>')" style="color: Black;" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false"><i class="fas fa-edit fa-cog"></i> Define Model</a>
+                            </div>
+                        </div>
+                    </li>
+                    <%}%>
+            </div>
         </div>
-      </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active text-center">
+                    <h4 class="mt-7" style="color: rgb(180, 180, 180)">
+                        Please select a project or create a project</h4>
+                </div>
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="exampleModalLabel">New Project</h3>
-          <button type="button" class="close" data-dismiss="modal" >
+    <div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">New Project</h3>
+                    <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
           </button>
-    
+
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/project/save">
+                        <div class="form-group mt-3">
+                            <label>Project name*</label><br>
+                            <input type="text" name="desc_project" required class="form-control">
+                        </div>
+                        <input type="submit" class="btn btn-primary mt-3" style="color: white" value="ok">
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <form method="POST" action="/project/save">
-              <div class="form-group mt-3">
-                  <label>Project name*</label><br>
-                  <input type="text" name="desc_project" required class="form-control">
-               </div>
-               <input type="submit" class="btn btn-primary mt-3" style="color: white" value="ok">
-          </form>
-      </div>
-      </div>
     </div>
-</div>
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.min.js"></script>
@@ -113,462 +132,653 @@
     <script src="/bower_components/codemirror/mode/javascript/javascript.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script>
-      AOS.init();
+        AOS.init();
 
-      function loadProject(params) {
-        $.ajax({
-                    url: "/project/extractionData/" + params,
-                    success: function(result, status, xhr) {
-                        document.getElementById("v-pills-home").innerHTML = result;
-                        chatInit();
-                        initCollaraborative();
-                     
-                    },
-                    error:function(error){
-                      console.log(error);
-                    }
+        function loadProject(params) {
+            $.ajax({
+                url: "/project/extractionData/" + params,
+                success: function(result, status, xhr) {
+                    document.getElementById("v-pills-home").innerHTML = result;
+                    chatInit();
+                    initCollaraborative();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
 
-                    
-                });
-        
-      }
+        function loadModel(params) {
+            $.ajax({
+                url: "/project/defineModel/" + params,
+                success: function(result, status, xhr) {
+                    console.log(result);
+                    document.getElementById("v-pills-home").innerHTML = result;
+                    chatInit();
+                    initCollaraborative();
+                    modelInit();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
     </script>
     <script type="text/javascript">
+        var feedback = null;
+        var output = null
+        var sender = 'dde';
+        var message = null
+        var send = null;
 
-      var feedback =null;
-      var output = null
-      var sender = 'dde';
-      var message = null
-      var send = null;
-
-function chatInit(){
-  
-      var socketChat =  io('/extraction');
-
-       feedback = document.getElementById('feedback');
-       output = document.getElementById('output');
-       sender = document.getElementById("userName").innerText ;
-      
-       message = document.getElementById('message');
-       send = document.getElementById('send');
-
-       room = document.getElementById("roomID").innerText ;
-      user = document.getElementById("userID").innerText ;
-
-
-      //Chat
-      //Sending message to server
-      send.addEventListener('click', function() {
-        socketChat.emit('sending', {
-              sender: sender,
-              id_project : room,
-              id_user : user,
-              message: message.value,
-              date:new Date(),
-          });
-          document.getElementById('message').value = '';
-          console.log("fefe");
-      });
-
-      //Receiving message coming from the server
-      socketChat.on('sending', function(data) {
-          if(data.id_project === room){
-            feedback.innerHTML = "";
-            
-            if (data.sender === sender) {
-                output.innerHTML += '<p style="color:white;background-color:rgb(30,30,30)" class="message-send mr-7 mt-3 ml-3 p-2">'
-                    +'<span style="width:100%;border-bottom:1px solid white;">Moi</span><br>'+ data.message + 
-                    '<br></p>';
-            } else {
-                output.innerHTML += '<div><p class="message-send mr-3 mt-3 ml-7 p-2">' +
-                        '<span style="width:100%;border-bottom:1px solid black;">'+data.sender+'</span><br>'
-                    + data.message + '</p></div>';
+        function modelInit() {
+            function selectFolder(e) {
+                var theFiles = e.target.files;
+                var relativePath = theFiles[0].webkitRelativePath;
+                var folder = relativePath.split("/");
+                alert(folder[0]);
             }
+
+            function showParameters() {
+                document.getElementById("parameters").style.display = "block";
+
+            }
+
+            var socket = io();
+
+            var define = document.getElementById("define");
+            var description = document.getElementById("description");
+
+            //send definition regex to server
+            define.addEventListener('keyup', function() {
+                socket.emit('define', define.value);
+            });
+
+            //receive definition regex from server
+            socket.on('define', function(data) {
+                define.value = data
+            });
+
+            //send descerption regex to server
+            description.addEventListener('keyup', function() {
+                socket.emit('description', description.value);
+            });
+
+            //receive description regex from server
+            socket.on('description', function(data) {
+                description.value = data
+            });
         }
-      });
+
+        function chatInit() {
+            var socketChat = io('/extraction');
+            feedback = document.getElementById('feedback');
+            output = document.getElementById('output');
+            sender = document.getElementById("userName").innerText;
+
+            message = document.getElementById('message');
+            send = document.getElementById('send');
+
+            room = document.getElementById("roomID").innerText;
+            user = document.getElementById("userID").innerText;
 
 
-      //Sending the name of th sener to the server
-      message.addEventListener('keypress', function() {
-        socketChat.emit('typing', {
-              sender: sender,
-              id_project : room,
-          });
-      });
+            //Chat
+            //Sending message to server
+            send.addEventListener('click', function() {
+                socketChat.emit('sending', {
+                    sender: sender,
+                    id_project: room,
+                    id_user: user,
+                    message: message.value,
+                    date: new Date(),
+                });
+                document.getElementById('message').value = '';
+                console.log("fefe");
+            });
 
-      //Receiving of this name and c
-      socketChat.on('typing', function(data) {
-        if(data.id_project === room && data.sender !== sender){
-            feedback.innerHTML = '<p><em>' + data.sender + ' is typing<em></p>';
-   
-        }
-          });
-
-
-          $.ajax({
-                    url: "/chat/getData/" + room,
-                    success: function(result, status, xhr) {
-                    result.forEach(data => {
+            //Receiving message coming from the server
+            socketChat.on('sending', function(data) {
+                if (data.id_project === room) {
+                    feedback.innerHTML = "";
                     if (data.sender === sender) {
-                        output.innerHTML += '<p style="color:white;background-color:rgb(30,30,30)" class="message-send mr-7 mt-3 ml-3 p-2">'
-                            +'<span style="width:100%;border-bottom:1px solid white;">Moi</span><br>'+ data.message + 
-                            '</p>';
+                        output.innerHTML += '<p style="color:white;background-color:rgb(30,30,30)" class="message-send mr-7 mt-3 ml-3 p-2">' +
+                            '<span style="width:100%;border-bottom:1px solid white;">Moi</span><br>' + data.message +
+                            '<br></p>';
                     } else {
                         output.innerHTML += '<div><p class="message-send mr-3 mt-3 ml-7 p-2">' +
-                                '<span style="width:100%;border-bottom:1px solid black;">'+data.sender+'</span><br>'
-                            + data.message + '</p></div>';
+                            '<span style="width:100%;border-bottom:1px solid black;">' + data.sender + '</span><br>' +
+                            data.message + '</p></div>';
                     }
-                    });
-                        
-
-                    },
-                    error : function(error)
-                    {
-                      console.log(error);
-                    }
-                    
-                });
-
-
-    
-    }
-    function showchat() {
-          document.getElementById("chat-div").style.visibility = 'visible';
-          document.getElementById("button").style.visibility = 'hidden';
-      }
-
-      function closechat() {
-          document.getElementById("chat-div").style.visibility = 'hidden';
-          document.getElementById("button").style.visibility = 'visible';
-      }
-
-
-      var myCodeMirror = null ;
-      var editorSummary = null;
-      var COLORS = null;
-      var USERS = [];
-
-      var socket = io('/extraction');
-      var room = "ce99137b-af29-4334-8daf-55e987714eff";
-      var user = 'essasddm';
-      var cursorElement = null;
-      var cursorElementSummary = null;
-
-
-      // receive on first doc
-      socket.on("doc", (msg) => {
-      let inside = false;
-      let i = 0;
-      if (msg.new_val.id === room && msg.new_val.user != user) {
-      var current_pos = myCodeMirror.getCursor();
-      myCodeMirror.getDoc().setValue(msg.new_val.value);
-      myCodeMirror.setCursor(current_pos);
-
-    while (i < USERS.length) {
-        if (USERS[i].id === msg.new_val.user) {
-            inside = true;
-            USERS[i].position = msg.new_val.cursor;
-            console.log("cursor change");
-        }
-        myCodeMirror.setBookmark(USERS[i].position, {
-            widget: cursorElement
-        });
-        i++;
-    }
-    if (inside === false) {
-        USERS.push({
-            id: msg.new_val.user,
-            position: msg.new_val.cursor
-        });
-        myCodeMirror.setBookmark(msg.new_val.cursor, {
-            widget: cursorElement
-        });
-        console.log("User insert");
-    }
-
-
-
-}
-});
-
-//receive data on summary data
-
-
-socket.on("doc-summary", (msg) => {
-      let inside = false;
-      let i = 0;
-      if (msg.new_val.id === room && msg.new_val.user != user) {
-      var current_pos = editorSummary.getCursor();
-      editorSummary.getDoc().setValue(msg.new_val.value);
-      editorSummary.setCursor(current_pos);
-
-    while (i < USERS.length) {
-        if (USERS[i].id === msg.new_val.user) {
-            inside = true;
-            USERS[i].position = msg.new_val.cursor;
-            console.log("cursor change");
-        }
-        editorSummary.setBookmark(USERS[i].position, {
-            widget: cursorElementSummary
-        });
-        i++;
-    }
-    if (inside === false) {
-        USERS.push({
-            id: msg.new_val.user,
-            position: msg.new_val.cursor
-        });
-        editorSummary.setBookmark(msg.new_val.cursor, {
-            widget: cursorElementSummary
-        });
-        console.log("User insert");
-    }
-
-
-
-}
-});
-
-      function initCollaraborative()
-      {
-                 myCodeMirror = CodeMirror.fromTextArea(document.getElementById("model"), {
-                    lineNumbers: true,
-                    lineWrapping: true,
-                    mode: "javascript",
-                });
-
-                editorSummary = CodeMirror.fromTextArea(document.getElementById("description_details"), {
-                    mode: "javascript",
-                });
-                 COLORS = [
-                    '#e21400', '#91580f', '#f8a700', '#f78b00',
-                    '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-                    '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-                ];
-                
-                /*user = {
-                    id: string;
-                    position: any;
-                }*/
-
-                room = document.getElementById("roomID").innerText ;
-                user = document.getElementById("userID").innerText ;
-                
-                cursorElement = getCursorNode(user);
-                cursorElementSummary = getCursorNodeSummary(user);
-
-
-                //let marker = myCodeMirror.setBookmark(myCodeMirror.getCursor(), { widget: cursorElement });
-
-                myCodeMirror.on("keyup", function() {
-                    var current_pos = myCodeMirror.getCursor();
-
-                    var msg = {
-                        id: room,
-                        user: user,
-                        value: myCodeMirror.getValue(),
-                        cursor: current_pos
-                    };
-                    socket.emit("document-update", msg);
-                });
-
-                editorSummary.on("keyup", function() {
-                    var current_pos = editorSummary.getCursor();
-
-                    var msg = {
-                        id: room,
-                        user: user,
-                        value: editorSunmmary.getValue(),
-                        cursor: current_pos
-                    };
-                    socket.emit("summmy-update", msg);
-                });
-
-                
-
-              
-
-                $.ajax({
-                    url: "/extraction/getData/" + room,
-                    success: function(result, status, xhr) {
-                        myCodeMirror.setValue(result.value);
-                    },
-                    error : function(error)
-                    {
-                      console.log(error);
-                    }
-                    
-                });
-                $.ajax({
-                    url: "/extraction/summary/getData/" + room,
-                    success: function(result, status, xhr) {
-                        myCodeMirror.setValue(result.value);
-                    },
-                    error : function(error)
-                    {
-                      console.log(error);
-                    }
-                    
-                });
-
-                
-
-                var concepts = document.getElementById("concepts");
-                var properties = document.getElementById("properties");
-                var objects = document.getElementById("objects");
-                var model = document.getElementById("model");
-                var description_details = document.getElementById("description_details");
-
-
-                //Send model to server
-                model.addEventListener('keyup', function() {
-                    socket.emit('model', model.value);
-                });
-
-                //Receive concept from server
-                socket.on('model', function(data) {
-                    model.value = data;
-                });
-
-                //Send concept to server
-                concepts.addEventListener('keyup', function() {
-                    socket.emit('concepts', concepts.value);
-                });
-
-                //Receive concept from server
-                socket.on('concepts', function(data) {
-                    concepts.value = data;
-                });
-
-                //Send property to server
-                properties.addEventListener('keyup', function() {
-                    socket.emit('properties', properties.value);
-                });
-
-                //Receive property from server
-                socket.on('properties', function(data) {
-                    properties.value = data;
-                });
-
-                //Send object to server
-                objects.addEventListener('keyup', function() {
-                    socket.emit('objects', objects.value);
-                });
-
-                //Receive object from server
-                socket.on('objects', function(data) {
-                    objects.value = data;
-                });
-
-                
-
-      }
-
-      function getCursorNode(user) {
-                    const cursorCoords = myCodeMirror.cursorCoords(myCodeMirror.getCursor());
-                    const cursorElement = document.createElement('span');
-                    cursorElement.style.borderLeftStyle = 'solid';
-                    cursorElement.style.borderLeftWidth = '2px';
-                    cursorElement.style.borderLeftColor = getUsernameColor(user);
-                    cursorElement.style.height = `${(cursorCoords.bottom - cursorCoords.top)}px`;
-                    cursorElement.style.padding = 0;
-                    cursorElement.style.zIndex = 0;
-                    return cursorElement;
                 }
-                function getCursorNodeSummary(user){
+            });
+            //Sending the name of th sener to the server
+            message.addEventListener('keypress', function() {
+                socketChat.emit('typing', {
+                    sender: sender,
+                    id_project: room,
+                });
+            });
 
-                    const cursorCoords = editorSummary.cursorCoords(editorSummary.getCursor());
-                    const cursorElement = document.createElement('span');
-                    cursorElement.style.borderLeftStyle = 'solid';
-                    cursorElement.style.borderLeftWidth = '2px';
-                    cursorElement.style.borderLeftColor = getUsernameColor(user);
-                    cursorElement.style.height = `${(cursorCoords.bottom - cursorCoords.top)}px`;
-                    cursorElement.style.padding = 0;
-                    cursorElement.style.zIndex = 0;
-                    return cursorElement;
+            //Receiving of this name and c
+            socketChat.on('typing', function(data) {
+                if (data.id_project === room && data.sender !== sender) {
+                    feedback.innerHTML = '<p><em>' + data.sender + ' is typing<em></p>';
 
                 }
+            });
 
-                function getUsernameColor(username) {
-                    // Compute hash code
-                    var hash = 7;
-                    for (var i = 0; i < username.length; i++) {
-                        hash = username.charCodeAt(i) + (hash << 5) - hash;
-                    }
-                    // Attribuer une couleur
-                    var index = Math.abs(hash % COLORS.length);
-                    return COLORS[index];
-                }
-                //document.getElementById("username").innerHTML = user;
 
-                function selectFolder(e) {
-                    var theFiles = e.target.files;
-                    var relativePath = theFiles[0].webkitRelativePath;
-                    var folder = relativePath.split("/");
-                    alert(folder[0]);
-                }
-
-                function showParameters() {
-                    document.getElementById("parameters").style.display = "block";
-
-                }
-                
-                function getParameterByName(name, url) {
-                    if (!url) url = window.location.href;
-                    name = name.replace(/[\[\]]/g, "\\$&");
-                    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                        results = regex.exec(url);
-                    if (!results) return null;
-                    if (!results[2]) return "";
-                    return decodeURIComponent(results[2].replace(/\+/g, " "));
-                }      
-
-                function searchUser(keyword){
-                    if(keyword.length > 0)
-                    {
-                        $.ajax({
-                        url: "/user/search-user/" + keyword,
-                        success: function(result, status, xhr) {
-                            document.getElementById("draft-participants").innerHTML = result;
-                            
-                        },
-                        error:function(error){
-                        console.log(error);
+            $.ajax({
+                url: "/chat/getData/" + room,
+                success: function(result, status, xhr) {
+                    result.forEach(data => {
+                        if (data.sender === sender) {
+                            output.innerHTML += '<p style="color:white;background-color:rgb(30,30,30)" class="message-send mr-7 mt-3 ml-3 p-2">' +
+                                '<span style="width:100%;border-bottom:1px solid white;">Moi</span><br>' + data.message +
+                                '</p>';
+                        } else {
+                            output.innerHTML += '<div><p class="message-send mr-3 mt-3 ml-7 p-2">' +
+                                '<span style="width:100%;border-bottom:1px solid black;">' + data.sender + '</span><br>' +
+                                data.message + '</p></div>';
                         }
-
-                        
                     });
 
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+
+            });
+
+
+
+        }
+
+        function showchat() {
+            document.getElementById("chat-div").style.visibility = 'visible';
+            document.getElementById("button").style.visibility = 'hidden';
+        }
+
+        function closechat() {
+            document.getElementById("chat-div").style.visibility = 'hidden';
+            document.getElementById("button").style.visibility = 'visible';
+        }
+
+
+        var myCodeMirror = null;
+        var editorSummary = null;
+        var COLORS = null;
+        var USERS = [];
+
+        var socket = io('/extraction');
+        var room = "ce99137b-af29-4334-8daf-55e987714eff";
+        var user = 'essasddm';
+        var cursorElement = null;
+        var cursorElementSummary = null;
+
+
+        // receive on first doc
+        socket.on("doc", (msg) => {
+            let inside = false;
+            let i = 0;
+            if (msg.new_val.id === room && msg.new_val.user != user) {
+                var current_pos = myCodeMirror.getCursor();
+                myCodeMirror.getDoc().setValue(msg.new_val.value);
+                myCodeMirror.setCursor(current_pos);
+
+                while (i < USERS.length) {
+                    if (USERS[i].id === msg.new_val.user) {
+                        inside = true;
+                        USERS[i].position = msg.new_val.cursor;
+                        console.log("cursor change");
+                    }
+                    myCodeMirror.setBookmark(USERS[i].position, {
+                        widget: cursorElement
+                    });
+                    i++;
+                }
+                if (inside === false) {
+                    USERS.push({
+                        id: msg.new_val.user,
+                        position: msg.new_val.cursor
+                    });
+                    myCodeMirror.setBookmark(msg.new_val.cursor, {
+                        widget: cursorElement
+                    });
+                    console.log("User insert");
+                }
+
+
+
+            }
+        });
+
+        //receive data on summary data
+
+
+        socket.on("doc-summary", (msg) => {
+            let inside = false;
+            let i = 0;
+            if (msg.new_val.id === room && msg.new_val.user != user) {
+                var current_pos = editorSummary.getCursor();
+                editorSummary.getDoc().setValue(msg.new_val.value);
+                editorSummary.setCursor(current_pos);
+
+                while (i < USERS.length) {
+                    if (USERS[i].id === msg.new_val.user) {
+                        inside = true;
+                        USERS[i].position = msg.new_val.cursor;
+                        console.log("cursor change");
+                    }
+                    editorSummary.setBookmark(USERS[i].position, {
+                        widget: cursorElementSummary
+                    });
+                    i++;
+                }
+                if (inside === false) {
+                    USERS.push({
+                        id: msg.new_val.user,
+                        position: msg.new_val.cursor
+                    });
+                    editorSummary.setBookmark(msg.new_val.cursor, {
+                        widget: cursorElementSummary
+                    });
+                    console.log("User insert");
+                }
+
+
+
+            }
+        });
+
+        function initCollaraborative() {
+            myCodeMirror = CodeMirror.fromTextArea(document.getElementById("model"), {
+                lineNumbers: true,
+                lineWrapping: true,
+                mode: "javascript",
+            });
+
+            editorSummary = CodeMirror.fromTextArea(document.getElementById("description_details"), {
+                mode: "javascript",
+            });
+            COLORS = [
+                '#e21400', '#91580f', '#f8a700', '#f78b00',
+                '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+                '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+            ];
+
+            /*user = {
+                id: string;
+                position: any;
+            }*/
+
+            room = document.getElementById("roomID").innerText;
+            user = document.getElementById("userID").innerText;
+
+            cursorElement = getCursorNode(user);
+            cursorElementSummary = getCursorNodeSummary(user);
+
+
+            //let marker = myCodeMirror.setBookmark(myCodeMirror.getCursor(), { widget: cursorElement });
+
+            myCodeMirror.on("keyup", function() {
+                var current_pos = myCodeMirror.getCursor();
+
+                var msg = {
+                    id: room,
+                    user: user,
+                    value: myCodeMirror.getValue(),
+                    cursor: current_pos
+                };
+                socket.emit("document-update", msg);
+            });
+
+            editorSummary.on("keyup", function() {
+                var current_pos = editorSummary.getCursor();
+
+                var msg = {
+                    id: room,
+                    user: user,
+                    value: editorSunmmary.getValue(),
+                    cursor: current_pos
+                };
+                socket.emit("summmy-update", msg);
+            });
+            $.ajax({
+                url: "/extraction/getData/" + room,
+                success: function(result, status, xhr) {
+                    myCodeMirror.setValue(result.value);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+
+            });
+            $.ajax({
+                url: "/extraction/summary/getData/" + room,
+                success: function(result, status, xhr) {
+                    myCodeMirror.setValue(result.value);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+
+            });
+
+
+
+            var concepts = document.getElementById("concepts");
+            var properties = document.getElementById("properties");
+            var objects = document.getElementById("objects");
+            var model = document.getElementById("model");
+            var description_details = document.getElementById("description_details");
+            //Send model to server
+            model.addEventListener('keyup', function() {
+                socket.emit('model', model.value);
+            });
+
+            //Receive concept from server
+            socket.on('model', function(data) {
+                model.value = data;
+            });
+
+            //Send concept to server
+            concepts.addEventListener('keyup', function() {
+                socket.emit('concepts', concepts.value);
+            });
+
+            //Receive concept from server
+            socket.on('concepts', function(data) {
+                concepts.value = data;
+            });
+
+            //Send property to server
+            properties.addEventListener('keyup', function() {
+                socket.emit('properties', properties.value);
+            });
+
+            //Receive property from server
+            socket.on('properties', function(data) {
+                properties.value = data;
+            });
+
+            //Send object to server
+            objects.addEventListener('keyup', function() {
+                socket.emit('objects', objects.value);
+            });
+
+            //Receive object from server
+            socket.on('objects', function(data) {
+                objects.value = data;
+            });
+
+
+
+        }
+
+        function getCursorNode(user) {
+            const cursorCoords = myCodeMirror.cursorCoords(myCodeMirror.getCursor());
+            const cursorElement = document.createElement('span');
+            cursorElement.style.borderLeftStyle = 'solid';
+            cursorElement.style.borderLeftWidth = '2px';
+            cursorElement.style.borderLeftColor = getUsernameColor(user);
+            cursorElement.style.height = `${(cursorCoords.bottom - cursorCoords.top)}px`;
+            cursorElement.style.padding = 0;
+            cursorElement.style.zIndex = 0;
+            return cursorElement;
+        }
+
+        function getCursorNodeSummary(user) {
+
+            const cursorCoords = editorSummary.cursorCoords(editorSummary.getCursor());
+            const cursorElement = document.createElement('span');
+            cursorElement.style.borderLeftStyle = 'solid';
+            cursorElement.style.borderLeftWidth = '2px';
+            cursorElement.style.borderLeftColor = getUsernameColor(user);
+            cursorElement.style.height = `${(cursorCoords.bottom - cursorCoords.top)}px`;
+            cursorElement.style.padding = 0;
+            cursorElement.style.zIndex = 0;
+            return cursorElement;
+        }
+
+        function getUsernameColor(username) {
+            // Compute hash code
+            var hash = 7;
+            for (var i = 0; i < username.length; i++) {
+                hash = username.charCodeAt(i) + (hash << 5) - hash;
+            }
+            // Attribuer une couleur
+            var index = Math.abs(hash % COLORS.length);
+            return COLORS[index];
+        }
+        //document.getElementById("username").innerHTML = user;
+        function selectFolder(e) {
+            var theFiles = e.target.files;
+            var relativePath = theFiles[0].webkitRelativePath;
+            var folder = relativePath.split("/");
+            alert(folder[0]);
+        }
+
+        function showParameters() {
+            document.getElementById("parameters").style.display = "block";
+
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return "";
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function searchUser(keyword) {
+            if (keyword.length > 0) {
+                $.ajax({
+                    url: "/user/search-user/" + keyword,
+                    success: function(result, status, xhr) {
+                        document.getElementById("draft-participants").innerHTML = result;
+
+                    },
+                    error: function(error) {
+                        console.log(error);
                     }
 
+
+                });
+
+            }
+
+        }
+
+        function associerUser(id) {
+            $.ajax({
+                url: "/association/save/" + room + "/" + id,
+                success: function(result, status, xhr) {
+                    console.log(result);
+                    if (result === 'error') {
+                        document.getElementById("btn" + id).innerText = "Error !this User are already Linkeld to the current project";
+                        document.getElementById("btn" + id).style.color = "white";
+                        document.getElementById("btn" + id).className = "float-right btn btn-danger";
+                        document.getElementById("btn" + id).onclick = function() {};
+                    } else {
+                        document.getElementById("btn" + result).innerText = "Great ! user Added to the current project";
+                        document.getElementById("btn" + result).style.color = "white";
+                        document.getElementById("btn" + result).className = "float-right btn btn-success";
+                        document.getElementById("btn" + result).onclick = function() {};
+                    }
+
+                },
+                error: function(error) {
+                    console.log(error);
                 }
-              function associerUser(id) {
-                
-                        $.ajax({
-                        url: "/association/save/"+room+"/"+id,
-
-                        success: function(result, status, xhr) {
-                      
-                            document.getElementById("btn"+result).innerText = "ajouté";
-                            document.getElementById("btn"+result).style.color = "blue";
-                            document.getElementById("btn"+result).className ="float-right";
-                            document.getElementById("btn"+result).onclick= function(){
-
-                            };
-
-
-                        },
-                        error:function(error){
-                        console.log(error);
+            });
+        }
+        //function pour rechercher un model en fonction du language et de l'id du project
+        function searchModelBylanguage(id) {
+            let language = document.getElementById('language').value;
+            let type = document.getElementById('typeChoise').value;
+            let select = document.getElementById('modelChoise');
+            let opt = select.getElementsByTagName('option');
+            while (opt[1]) {
+                select.removeChild(opt[1]);
+            }
+            console.log(language);
+            $.ajax({
+                url: "/model/search/" + id,
+                success: function(result, status, xhr) {
+                    //console.log(result);
+                    for (let i = 0; i < result.length; i++) {
+                        if (result[i].language === language && result[i].type === type) {
+                            let option = new Option(result[i].description, result[i].id);
+                            select.options.add(option);
+                            console.log(select.options)
                         }
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
 
-                        
-                    });
+        function changeL(id) {
+            let type = document.getElementById('typeChoise').value;
+            if (type !== 'null') {
+                searchModelBylanguage(id);
+            }
+        }
+    </script>
+    <script>
 
-                 
+        function loadChart() {
+            var randomScalingFactor = function() {
+                return Math.round(Math.random() * 100);
+            };
+            let id =document.getElementById('id_project').value;
+            let project_name = document.getElementById('pjName').value;
+            let number_users_curent_project = document.getElementById('nbUsersp').value;
+            let model;
+            let allModel;
+                $.ajax({
+                    url: "/model/searchModelProject/" + id,
+                    success: function(result, status, xhr) {
+                        model = result.length;
+                        $.ajax({
+                            url: "/model/searchAllModel",
+                            success: function(result, status, xhr) {
+                                allModel = result.length;
+                                $.ajax({
+                                    url: "/model/getAllUsers",
+                                    success: function(result, status, xhr) {
+                                        let allUsers = result.length;
+                                        $.ajax({
+                                            url: "/model/getAllMessages",
+                                            success: function(result, status, xhr) {
+                                               let allMessages = result.length;
+                                                $.ajax({
+                                                    url: "/model/getAllMessagesProject/"+id,
+                                                    success: function(result, status, xhr) {
+                                                        let allMessagesProject = result.length;
+                                                        let config = {
+                                                            type: 'bar',
+                                                            data: {
+                                                                datasets: [{
+                                                                    label: "For this Project" + project_name + " ",
+                                                                    data: [model, number_users_curent_project, allMessagesProject],
+                                                                    backgroundColor: ['green', 'green', 'green']
+                                                                }, {
+                                                                    label: "For all other Projects",
+                                                                    data: [(allModel-model), (allUsers-number_users_curent_project), (allMessages-allMessagesProject)],
+                                                                    backgroundColor: ['red', 'red', 'red']
+                                                                }, {
+                                                                    label: "Total statistiques",
+                                                                    data: [allModel, allUsers, allMessages],
+                                                                    backgroundColor: ['blue', 'blue', 'blue']
+                                                                }],
+                                                                labels: [
+                                                                    'Models',
+                                                                    'Users',
+                                                                    'Messages group'
+                                                                ],
 
-              }  
+                                                            },
+                                                            options: {
+                                                                responsive: true
+                                                            }
+                                                        };
+                                                        let ctx = document.getElementById('chart-area');
+                                                        let myChart = new Chart(ctx, config);
+                                                        console.log(model);
+                                                    },
+                                                    error: function(error) {
+                                                        console.log(error);
+                                                    }
+                                                });
+                                            },
+                                            error: function(error) {
+                                                console.log(error);
+                                            }
+                                        });
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                    }
+                                });
+                            },
+                            error: function(error) {
+                                console.log(error);
+                            }
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            console.log('ok load');
+        };
 
-  </script>
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            config.data.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return randomScalingFactor();
+                });
+            });
+
+            window.myPie.update();
+        });
+
+        var colorNames = Object.keys(window.chartColors);
+        document.getElementById('addDataset').addEventListener('click', function() {
+            var newDataset = {
+                backgroundColor: [],
+                data: [],
+                label: 'New dataset ' + config.data.datasets.length,
+            };
+
+            for (var index = 0; index < config.data.labels.length; ++index) {
+                newDataset.data.push(randomScalingFactor());
+
+                var colorName = colorNames[index % colorNames.length];
+                var newColor = window.chartColors[colorName];
+                newDataset.backgroundColor.push(newColor);
+            }
+
+            config.data.datasets.push(newDataset);
+            window.myPie.update();
+        });
+
+        document.getElementById('removeDataset').addEventListener('click', function() {
+            config.data.datasets.splice(0, 1);
+            window.myPie.update();
+        });
+    </script>
+    <script src="../js/Chart.min.js"></script>
+    <script src="../js/utils.js"></script>
 </body>
+
 </html>

@@ -16,6 +16,7 @@ var projectRouter = require('./routes/project');
 var editeurRouter = require('./routes/editeur');
 var userRouter = require('./routes/account');
 var registerRouter = require('./routes/register');
+var erreurRouter = require('./routes/erreur');
 
 
 var app = express();
@@ -50,6 +51,7 @@ app.use('/editeur', editeurRouter);
 app.use('/user', userRouter);
 app.use('/registration', registerRouter);
 app.use('/accueil', accueilRouter);
+app.use('/erreur', erreurRouter);
 
 //catch 404 notfound
 app.use((req, res, next) => {

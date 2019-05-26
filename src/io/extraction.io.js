@@ -1,9 +1,8 @@
-
 const extractionController = require('./../controller/ExtractionController')
 const chatRepository = require('./../repository/chatRepository')
 
 
-module.exports.repond = (socket,io) => {
+module.exports.repond = (socket, io) => {
 
     console.log("User Connected of extraction io");
 
@@ -13,23 +12,20 @@ module.exports.repond = (socket,io) => {
 
     socket.on("document-update", (msg) => {
         extractionController.save(msg).then((res) => {
-            extractionController.edit().then((row) => {io.emit("doc",row)});
+            extractionController.edit().then((row) => { io.emit("doc", row) });
         }).catch((err) => {
             console.log(err);
         })
     });
-
-
-    
     socket.on("document-update", (msg) => {
         extractionController.save(msg).then((res) => {
-            extractionController.edit().then((row) => {io.emit("doc",row)});
+            extractionController.edit().then((row) => { io.emit("doc", row) });
         }).catch((err) => {
             console.log(err);
         })
     });
 
-    
+
 
     io.on("documents", () => {
         extractionController.getAll().then((docs) => {
@@ -38,9 +34,9 @@ module.exports.repond = (socket,io) => {
     });
     socket.on('sending', function(data) {
         chatRepository.save(data).then((res) => {
-                    io.emit('sending', data);
+            io.emit('sending', data);
         });
-       
+
     });
 
     //send the name of the person who tping
