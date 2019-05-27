@@ -1,5 +1,5 @@
 const express = require("express");
-
+const db = require("./src/middleware/db");
 //appRouter
 const app = require("./src/app");
 
@@ -28,7 +28,7 @@ ioChat.on("connection", (socket) => {
 });
 
 
-
+db.initTable();
 
 const port = process.env.PORT || 3000;
 
