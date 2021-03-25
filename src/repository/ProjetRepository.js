@@ -1,7 +1,7 @@
 const r = require("rethinkdb");
 
 let projetRepository = {};
-r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
+r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {
     projetRepository.findByIdProjet = (id_projet) => {
         return new Promise((resolve, reject) => {
             r
@@ -10,7 +10,6 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
                 .get(id_projet)
                 .run(conn)
                 .then(function(project) {
-                    console.log("jjjj");
                     resolve(project);
                 })
                 .catch(function(err) {

@@ -1,9 +1,9 @@
 const r = require("rethinkdb");
 
 let modelRepository = {};
-r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
-    //recherche en fonction de l'id
-    modelRepository.findByIdModel = (id) => {
+r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {
+     //recherche en fonction de l'id
+     modelRepository.findByIdModel = (id) => {
         return new Promise((resolve, reject) => {
             r
                 .db("test")
@@ -166,5 +166,6 @@ r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
         });
     };
 });
+r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {});
 
 module.exports = modelRepository

@@ -30,7 +30,7 @@ ioChat.on("connection", (socket) => {
 
 db.initTable();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3005;
 
 
 // Setup Express Listener

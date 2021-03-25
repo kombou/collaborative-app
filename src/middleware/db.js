@@ -2,7 +2,9 @@ const r = require("rethinkdb");
 let db = {}
 const base = 'test';
 db.initTable = () => {
-    r.connect({host:"localhost",port: 28015},(err,conn) => {
+    console.log(`initialisation of database`);
+    
+    r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {
         r
             .db(base)
             .tableList()

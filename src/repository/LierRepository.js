@@ -2,7 +2,7 @@ const r = require("rethinkdb");
 const ProjetRepository = require('./ProjetRepository');
 const modelRepository = require('./ModelRepository');
 let lierRepository = {};
-r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
+r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {
     lierRepository.findAllModelProjet = (id_projet) => {
         return new Promise((resolve, reject) => {
             r

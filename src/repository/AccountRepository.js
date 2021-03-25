@@ -1,7 +1,8 @@
 const r = require("rethinkdb");
 
 let accountRepository = {};
-r.connect({ host: "localhost", port: 28015 }, (err, conn) => {
+
+r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {
     accountRepository.matchUser = (username) => {
         return new Promise((resolve, reject) => {
             r
