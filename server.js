@@ -34,6 +34,6 @@ const port = process.env.PORT || 3005;
 
 
 // Setup Express Listener
-http.listen(port, "0.0.0.0", function() {
+http.listen(port, "192.168.100.7", function() {
     console.log(`listening on: localhost:${port}`);
 });

@@ -1,4 +1,4 @@
-const chatRepository = require('./../repository/ChatRepository');
+const chatRepository = require('./../repository/chatRepository');
 
 
 

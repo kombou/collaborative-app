@@ -17,13 +17,6 @@ module.exports.repond = (socket, io) => {
             console.log(err);
         })
     });
-    socket.on("document-update", (msg) => {
-        extractionController.save(msg).then((res) => {
-            extractionController.edit().then((row) => { io.emit("doc", row) });
-        }).catch((err) => {
-            console.log(err);
-        })
-    });
 
 
 
@@ -32,6 +25,7 @@ module.exports.repond = (socket, io) => {
             return docs;
         });
     });
+    
     socket.on('sending', function(data) {
         chatRepository.save(data).then((res) => {
             io.emit('sending', data);

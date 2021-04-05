@@ -444,7 +444,7 @@
                     value: editorSunmmary.getValue(),
                     cursor: current_pos
                 };
-                socket.emit("summmy-update", msg);
+                socket.emit("summary-update", msg);
             });
             $.ajax({
                 url: "/extraction/getData/" + room,

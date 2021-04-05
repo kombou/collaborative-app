@@ -166,6 +166,5 @@ r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {
         });
     };
 });
-r.connect({host:"93.104.211.190",port: 32769}).then(function(conn) {});
 
 module.exports = modelRepository

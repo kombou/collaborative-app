@@ -14,6 +14,8 @@ db.initTable = () => {
                 tableCreate(tables,"projet",conn);
                 tableCreate(tables,"chat",conn);
                 tableCreate(tables,"associer",conn);
+                tableCreate(tables,"lier",conn);
+                tableCreate(tables,"model",conn);
             });
     });
 };
